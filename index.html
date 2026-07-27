@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facu Villanueva — Portfolio</title>
+<meta name="description" content="Facu Villanueva — HR professional turned AI Engineer, building AI-powered recruiting products.">
+<style>
+  :root{
+    --bg-0:#05070d;
+    --bg-1:#0a0e1a;
+    --accent:#5ee1c9;
+    --accent-2:#7c8bff;
+    --text-0:#eef1f8;
+    --text-1:#a7adc2;
+    --card:#0f1424;
+    --border:#1e2440;
+  }
+  [data-theme="light"]{
+    --bg-0:#f4f5fb;
+    --bg-1:#ffffff;
+    --accent:#0f9d84;
+    --accent-2:#4a54c9;
+    --text-0:#10121c;
+    --text-1:#4b4f63;
+    --card:#ffffff;
+    --border:#e1e3ef;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    background:var(--bg-0);
+    color:var(--text-0);
+    min-height:100vh;
+    overflow-x:hidden;
+    transition:background .4s ease, color .4s ease;
+  }
+  #bgcanvas{
+    position:fixed; inset:0; z-index:-1; width:100%; height:100%;
+  }
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    backdrop-filter:blur(10px);
+    background:color-mix(in srgb, var(--bg-1) 70%, transparent);
+    border-bottom:1px solid var(--border);
+  }
+  nav .brand{font-weight:700; letter-spacing:.5px; color:var(--accent);}
+  nav ul{list-style:none; display:flex; gap:22px; flex-wrap:wrap;}
+  nav ul button{
+    background:none; border:none; color:var(--text-1); font-size:.92rem;
+    cursor:pointer; padding:6px 4px; transition:color .2s;
+  }
+  nav ul button:hover, nav ul button.active{color:var(--accent);}
+  #theme-toggle{
+    border:1px solid var(--border); background:var(--card); color:var(--text-0);
+    border-radius:999px; padding:6px 14px; cursor:pointer; font-size:.85rem;
+  }
+  section{
+    max-width:900px; margin:0 auto; padding:120px 24px 60px;
+    min-height:60vh;
+  }
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+    padding-top:0;
+  }
+  .hero .hi{color:var(--text-1); font-size:1.1rem; margin-bottom:10px;}
+  .hero h1{font-size:clamp(2.2rem, 6vw, 4rem); font-weight:800; margin-bottom:14px;}
+  .hero h1 span{color:var(--accent);}
+  .hero .role{
+    font-size:clamp(1.1rem, 3vw, 1.6rem); color:var(--accent-2); font-weight:600;
+    min-height:2.2em;
+  }
+  .hero .role::after{content:'|'; animation:blink 1s step-end infinite; color:var(--accent);}
+  @keyframes blink{50%{opacity:0;}}
+  .scroll-hint{margin-top:50px; color:var(--text-1); font-size:.85rem;}
+  .scroll-hint .arrow{display:block; margin-top:8px; animation:bounce 1.6s infinite;}
+  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+
+  h2.section-title{
+    font-size:clamp(1.6rem, 4vw, 2.2rem); margin-bottom:8px; font-weight:800;
+  }
+  .section-sub{color:var(--text-1); margin-bottom:36px;}
+
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:22px 24px; margin-bottom:18px; transition:transform .2s, border-color .2s;
+  }
+  .card:hover{transform:translateY(-3px); border-color:var(--accent);}
+  .card h3{font-size:1.1rem; margin-bottom:6px;}
+  .card p{color:var(--text-1); font-size:.95rem; line-height:1.55;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .tag{
+    font-size:.75rem; padding:4px 10px; border-radius:999px;
+    background:color-mix(in srgb, var(--accent) 14%, transparent);
+    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:16px;}
+
+  .about-list{margin-top:18px; color:var(--text-1); line-height:1.9;}
+  .about-list li{margin-left:18px;}
+
+  .skills-grid{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;}
+  .skill-chip{
+    padding:8px 16px; border-radius:10px; background:var(--card);
+    border:1px solid var(--border); font-size:.9rem;
+  }
+
+  footer{
+    text-align:center; padding:50px 24px 70px; color:var(--text-1); font-size:.9rem;
+  }
+  footer a{color:var(--accent); text-decoration:none; font-weight:600;}
+  footer a:hover{text-decoration:underline;}
+
+  @media (max-width:640px){
+    nav{padding:14px 18px;}
+    nav ul{gap:12px;}
+    section{padding-top:100px;}
+  }
+</style>
+</head>
+<body data-theme="dark">
+
+<canvas id="bgcanvas"></canvas>
+
+<nav>
+  <div class="brand">FV</div>
+  <ul id="navlinks">
+    <li><button data-target="about">About</button></li>
+    <li><button data-target="projects">Projects</button></li>
+    <li><button data-target="services">Services</button></li>
+    <li><button data-target="skills">Skills</button></li>
+    <li><button data-target="contact">Contact</button></li>
+  </ul>
+  <button id="theme-toggle">🌙 Dark</button>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hi">Hi there,</div>
+  <h1>I'm <span>Facu Villanueva</span></h1>
+  <div class="role"><span id="typewriter"></span></div>
+  <div class="scroll-hint">About me<span class="arrow">↓</span></div>
+</section>
+
+<section id="about">
+  <h2 class="section-title">About Me</h2>
+  <p class="section-sub">HR professional turned AI Engineer, building AI-powered recruiting products.</p>
+  <div class="card">
+    <p>
+      I started in Human Resources and moved deliberately into AI engineering, now working in a
+      hybrid HR/tech role while building an AI recruiting startup on my own. That path gives me
+      something most engineers don't have: first-hand understanding of how hiring actually breaks,
+      combined with the ability to build the software that fixes it.
+    </p>
+    <ul class="about-list">
+      <li>Designing and building an AI-native Applicant Tracking System from scratch</li>
+      <li>Shipping full-stack products end-to-end — product, design and code</li>
+      <li>Integrating LLMs into real operational workflows, not just demos</li>
+      <li>Automating content, recruiting and internal ops pipelines with AI agents</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <h2 class="section-title">Projects</h2>
+  <p class="section-sub">Things I've been building.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>WorkPulse</h3>
+      <p>AI-native Applicant Tracking System built from the ground up, with a dark-native
+      product design and a focus on making recruiting workflows faster and less manual.</p>
+      <div class="tags"><span class="tag">ATS</span><span class="tag">AI Recruiting</span><span class="tag">Product Design</span></div>
+    </div>
+    <div class="card">
+      <h3>Cardón Slug</h3>
+      <p>A Metal Slug-style arcade game set in Salta, built as a hands-on learning project
+      for game development and AI-assisted engineering — single-file canvas and JS.</p>
+      <div class="tags"><span class="tag">Canvas</span><span class="tag">JavaScript</span><span class="tag">Gamedev</span></div>
+    </div>
+    <div class="card">
+      <h3>MaroteApp</h3>
+      <p>A playful psychometric assessment MVP, designed to make evaluation feel less like a
+      test and more like a game.</p>
+      <div class="tags"><span class="tag">Psychometrics</span><span class="tag">MVP</span></div>
+    </div>
+    <div class="card">
+      <h3>Content Pipeline</h3>
+      <p>An autonomous content engine that drafts, self-reviews and organizes marketing
+      content on a schedule, with a human sign-off before anything goes out.</p>
+      <div class="tags"><span class="tag">AI Agents</span><span class="tag">Automation</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <h2 class="section-title">Services</h2>
+  <p class="section-sub">What I can help you build</p>
+  <div class="grid">
+    <div class="card">
+      <h3>AI Recruiting Systems</h3>
+      <p>ATS and recruiting-tool design and development, built around how hiring teams
+      actually work — not a generic template.</p>
+    </div>
+    <div class="card">
+      <h3>HR + AI Consulting</h3>
+      <p>Bringing an HR practitioner's perspective to AI adoption in people operations —
+      what to automate, what not to, and why.</p>
+    </div>
+    <div class="card">
+      <h3>Full-Stack Product Development</h3>
+      <p>End-to-end delivery from product thinking to shipped code — frontend, backend and
+      deployment.</p>
+    </div>
+    <div class="card">
+      <h3>AI Workflow Automation</h3>
+      <p>Agent-driven pipelines for content, ops and internal tooling, wired into the tools
+      teams already use.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="section-title">Skills</h2>
+  <p class="section-sub">Technologies & tools I work with</p>
+  <div class="skills-grid">
+    <span class="skill-chip">JavaScript</span>
+    <span class="skill-chip">TypeScript</span>
+    <span class="skill-chip">Python</span>
+    <span class="skill-chip">Next.js</span>
+    <span class="skill-chip">Vercel</span>
+    <span class="skill-chip">Claude / LLMs</span>
+    <span class="skill-chip">AI Agent Systems</span>
+    <span class="skill-chip">Notion API</span>
+    <span class="skill-chip">Automation Pipelines</span>
+    <span class="skill-chip">Recruiting Tech / ATS</span>
+    <span class="skill-chip">HR Operations</span>
+    <span class="skill-chip">Product Design</span>
+    <span class="skill-chip">Git / GitHub</span>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">Contact</h2>
+  <p class="section-sub">Get in touch — I'd love to hear from you</p>
+  <div class="card">
+    <h3>Email</h3>
+    <p><a href="mailto:villanueva.facundo.nicolas@gmail.com" style="color:var(--accent); text-decoration:none;">villanueva.facundo.nicolas@gmail.com</a></p>
+  </div>
+</section>
+
+<footer>
+  Built by <a href="mailto:villanueva.facundo.nicolas@gmail.com">Facu Villanueva</a> · updated as I keep shipping
+</footer>
+
+<script>
+  // Typewriter
+  const roles = ["HR → AI Engineer", "AI Recruiting Builder", "Full-Stack Developer", "Solo Founder"];
+  const tw = document.getElementById('typewriter');
+  let ri = 0, ci = 0, deleting = false;
+  function tick(){
+    const word = roles[ri];
+    if(!deleting){
+      ci++;
+      tw.textContent = word.slice(0, ci);
+      if(ci === word.length){ deleting = true; setTimeout(tick, 1400); return; }
+    } else {
+      ci--;
+      tw.textContent = word.slice(0, ci);
+      if(ci === 0){ deleting = false; ri = (ri+1) % roles.length; }
+    }
+    setTimeout(tick, deleting ? 45 : 85);
+  }
+  tick();
+
+  // Nav scroll spy + smooth nav
+  const buttons = document.querySelectorAll('#navlinks button');
+  buttons.forEach(b => b.addEventListener('click', () => {
+    document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});
+  }));
+  const sections = [...document.querySelectorAll('section[id]')];
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        buttons.forEach(b => b.classList.toggle('active', b.dataset.target === e.target.id));
+      }
+    });
+  }, {rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s => spy.observe(s));
+
+  // Theme toggle
+  const toggle = document.getElementById('theme-toggle');
+  toggle.addEventListener('click', () => {
+    const body = document.body;
+    const isDark = body.getAttribute('data-theme') === 'dark';
+    body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    toggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+  });
+
+  // Dynamic background: drifting soft particles
+  const canvas = document.getElementById('bgcanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles;
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  function initParticles(){
+    particles = Array.from({length: 55}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      r: 0.6 + Math.random()*1.8,
+      vx: (Math.random()-0.5)*0.15,
+      vy: (Math.random()-0.5)*0.15,
+      hue: Math.random() > 0.5 ? '94,225,201' : '124,139,255'
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0) p.x = W; if(p.x > W) p.x = 0;
+      if(p.y < 0) p.y = H; if(p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${p.hue},0.45)`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', () => { resize(); initParticles(); });
+  resize(); initParticles(); draw();
+</script>
+</body>
+</html>
