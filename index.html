@@ -3,268 +3,683 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Facu Villanueva — Portfolio</title>
-<meta name="description" content="Facu Villanueva — HR professional turned AI Engineer, building AI-powered recruiting products.">
+<title>Facu Villanueva — Operator Log</title>
+<meta name="description" content="Facu Villanueva — I help build the best teams. HR practitioner directing AI-built systems to make it real." id="metaDescription">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-0:#05070d;
-    --bg-1:#0a0e1a;
-    --accent:#5ee1c9;
-    --accent-2:#7c8bff;
-    --text-0:#eef1f8;
-    --text-1:#a7adc2;
-    --card:#0f1424;
-    --border:#1e2440;
-  }
-  [data-theme="light"]{
-    --bg-0:#f4f5fb;
-    --bg-1:#ffffff;
-    --accent:#0f9d84;
-    --accent-2:#4a54c9;
-    --text-0:#10121c;
-    --text-1:#4b4f63;
-    --card:#ffffff;
-    --border:#e1e3ef;
+    --bg:#0a0a0a;
+    --bg-raised:#111214;
+    --border:#262626;
+    --border-soft:#1a1b1e;
+    --text-0:#fafafa;
+    --text-1:#8a8a8a;
+    --text-2:#5a5c60;
+    --accent:#f5a623;
+    --accent-dim:#8a6423;
+    --ok:#3ecf8e;
+    --font-display:'Space Grotesk', system-ui, sans-serif;
+    --font-body:'Inter', system-ui, sans-serif;
+    --font-mono:'JetBrains Mono', ui-monospace, monospace;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
   body{
-    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
-    background:var(--bg-0);
+    font-family:var(--font-body);
+    background:
+      linear-gradient(var(--border-soft) 1px, transparent 1px) 0 0/100% 44px,
+      linear-gradient(90deg, var(--border-soft) 1px, transparent 1px) 0 0/44px 100%,
+      var(--bg);
+    background-attachment:fixed;
     color:var(--text-0);
     min-height:100vh;
-    overflow-x:hidden;
-    transition:background .4s ease, color .4s ease;
   }
-  #bgcanvas{
-    position:fixed; inset:0; z-index:-1; width:100%; height:100%;
+  a{color:inherit;}
+  ::selection{background:var(--accent); color:#0a0a0a;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .mono{font-family:var(--font-mono);}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:.78rem; letter-spacing:.06em;
+    color:var(--accent); display:flex; align-items:center; gap:8px; margin-bottom:14px;
   }
+  .eyebrow::before{content:'';}
+  .eyebrow .idx{color:var(--text-2);}
+
   nav{
     position:fixed; top:0; left:0; right:0; z-index:100;
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 32px;
+    padding:16px 32px;
+    background:color-mix(in srgb, var(--bg) 82%, transparent);
     backdrop-filter:blur(10px);
-    background:color-mix(in srgb, var(--bg-1) 70%, transparent);
     border-bottom:1px solid var(--border);
   }
-  nav .brand{font-weight:700; letter-spacing:.5px; color:var(--accent);}
-  nav ul{list-style:none; display:flex; gap:22px; flex-wrap:wrap;}
+  nav .brand-group{display:flex; align-items:center; gap:10px;}
+  nav .brand-name{
+    font-family:var(--font-display); font-weight:600; font-size:.95rem; color:var(--text-0);
+    letter-spacing:-.01em;
+  }
+  nav .brand{
+    font-family:var(--font-mono); font-weight:600; font-size:.85rem; color:var(--text-0);
+    display:flex; align-items:center; gap:8px;
+    background:none; border:1px solid transparent; cursor:pointer; padding:6px 10px; border-radius:6px;
+    transition:border-color .2s, background .2s;
+  }
+  nav .brand:hover{border-color:var(--border); background:var(--bg-raised);}
+  nav .brand.copied{color:var(--ok);}
+  nav .brand .dot{width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 8px var(--ok); flex-shrink:0;}
+  nav .brand .copy-icon{color:var(--text-2); font-size:.95rem;}
+  nav .brand .email-text{max-width:34vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  @media (max-width:640px){ nav .brand .email-text{max-width:32vw; font-size:.72rem;} }
+  nav ul{list-style:none; display:flex; align-items:center; gap:26px; flex-wrap:wrap;}
   nav ul button{
-    background:none; border:none; color:var(--text-1); font-size:.92rem;
-    cursor:pointer; padding:6px 4px; transition:color .2s;
+    background:none; border:none; color:var(--text-1); font-family:var(--font-mono);
+    font-size:.8rem; cursor:pointer; padding:6px 2px; transition:color .2s; letter-spacing:.02em;
   }
   nav ul button:hover, nav ul button.active{color:var(--accent);}
-  #theme-toggle{
-    border:1px solid var(--border); background:var(--card); color:var(--text-0);
-    border-radius:999px; padding:6px 14px; cursor:pointer; font-size:.85rem;
+  .lang-toggle{
+    font-family:var(--font-mono); font-size:.75rem; font-weight:600; letter-spacing:.02em;
+    background:none; border:1px solid var(--border); border-radius:6px; padding:5px 10px;
+    color:var(--text-1); cursor:pointer; display:flex; align-items:center; gap:5px;
+    transition:border-color .2s, color .2s;
   }
-  section{
-    max-width:900px; margin:0 auto; padding:120px 24px 60px;
-    min-height:60vh;
-  }
-  .hero{
-    min-height:100vh; display:flex; flex-direction:column; justify-content:center;
-    padding-top:0;
-  }
-  .hero .hi{color:var(--text-1); font-size:1.1rem; margin-bottom:10px;}
-  .hero h1{font-size:clamp(2.2rem, 6vw, 4rem); font-weight:800; margin-bottom:14px;}
-  .hero h1 span{color:var(--accent);}
-  .hero .role{
-    font-size:clamp(1.1rem, 3vw, 1.6rem); color:var(--accent-2); font-weight:600;
-    min-height:2.2em;
-  }
-  .hero .role::after{content:'|'; animation:blink 1s step-end infinite; color:var(--accent);}
-  @keyframes blink{50%{opacity:0;}}
-  .scroll-hint{margin-top:50px; color:var(--text-1); font-size:.85rem;}
-  .scroll-hint .arrow{display:block; margin-top:8px; animation:bounce 1.6s infinite;}
-  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+  .lang-toggle:hover{border-color:var(--accent); color:var(--accent);}
+  .lang-toggle .sep{color:var(--text-2);}
+  .lang-toggle .on{color:var(--accent);}
 
-  h2.section-title{
-    font-size:clamp(1.6rem, 4vw, 2.2rem); margin-bottom:8px; font-weight:800;
+  section{max-width:920px; margin:0 auto; padding:96px 28px 40px;}
+  .section-divider{border-top:1px solid var(--border); }
+
+  /* HERO */
+  .hero{min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:80px;}
+  .boot{
+    font-family:var(--font-mono); font-size:.82rem; color:var(--text-2); line-height:1.9;
+    margin-bottom:28px; min-height:6.8em;
   }
-  .section-sub{color:var(--text-1); margin-bottom:36px;}
+  .boot .line{opacity:0; animation:fadein .3s forwards;}
+  .boot .ok{color:var(--ok);}
+  @keyframes fadein{to{opacity:1;}}
+  .hero h1{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(2.4rem, 7vw, 4.6rem); line-height:1.02; letter-spacing:-.01em;
+    margin-bottom:16px; opacity:0; animation:fadein .5s forwards; animation-delay:1.9s;
+  }
+  .hero .role-line{
+    font-family:var(--font-mono); font-size:clamp(1rem, 2.4vw, 1.25rem); color:var(--accent);
+    min-height:1.6em; opacity:0; animation:fadein .5s forwards; animation-delay:2.15s;
+  }
+  .hero .role-line::before{content:'> '; color:var(--text-2);}
+  .hero .role-line .cursor{animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero .thesis{
+    max-width:560px; color:var(--text-1); font-size:1.02rem; line-height:1.6; margin-top:22px;
+    opacity:0; animation:fadein .5s forwards; animation-delay:2.4s;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-mono); font-weight:600; font-size:.88rem;
+    background:var(--accent); color:#0a0a0a; text-decoration:none;
+    padding:12px 20px; border-radius:7px; border:1px solid var(--accent);
+    transition:transform .15s, box-shadow .15s; cursor:pointer;
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 6px 18px color-mix(in srgb, var(--accent) 35%, transparent);}
+  .btn-ghost{
+    background:none; color:var(--text-0); border:1px solid var(--border);
+  }
+  .btn-ghost:hover{border-color:var(--accent); box-shadow:none;}
+  .hero-cta{
+    margin-top:30px; display:flex; gap:12px; flex-wrap:wrap;
+    opacity:0; animation:fadein .5s forwards; animation-delay:2.55s;
+  }
+  .scroll-hint{
+    margin-top:44px; color:var(--text-2); font-family:var(--font-mono); font-size:.75rem;
+    opacity:0; animation:fadein .5s forwards; animation-delay:2.75s;
+  }
+  .projects-cta{
+    margin-top:22px; padding-top:26px; border-top:1px solid var(--border-soft);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;
+  }
+  .projects-cta p{color:var(--text-1); font-size:.92rem;}
+  @media (max-width:600px){.projects-cta{flex-direction:column; align-items:flex-start;}}
+  .scroll-hint .arrow{display:inline-block; margin-left:6px; animation:bounce 1.6s infinite;}
+  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+  /* GENERIC */
+  h2.h{font-family:var(--font-display); font-weight:600; font-size:clamp(1.4rem, 3.4vw, 1.9rem); margin-bottom:6px;}
+  .lede{color:var(--text-1); margin-bottom:32px; max-width:620px; line-height:1.55;}
 
   .card{
-    background:var(--card); border:1px solid var(--border); border-radius:14px;
-    padding:22px 24px; margin-bottom:18px; transition:transform .2s, border-color .2s;
+    background:var(--bg-raised); border:1px solid var(--border); border-radius:8px;
+    padding:24px 26px; transition:border-color .2s, transform .2s;
   }
-  .card:hover{transform:translateY(-3px); border-color:var(--accent);}
-  .card h3{font-size:1.1rem; margin-bottom:6px;}
-  .card p{color:var(--text-1); font-size:.95rem; line-height:1.55;}
-  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .card:hover{border-color:var(--accent-dim); transform:translateY(-2px);}
+  .card h3{font-family:var(--font-display); font-size:1.12rem; font-weight:600; margin-bottom:8px;}
+  .card p{color:var(--text-1); font-size:.92rem; line-height:1.6;}
+  .tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:16px;}
+  .card-link{
+    display:inline-flex; align-items:center; gap:6px; margin-top:16px;
+    font-family:var(--font-mono); font-size:.82rem; font-weight:600; color:var(--accent);
+    text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s;
+  }
+  .card-link:hover{border-bottom-color:var(--accent);}
   .tag{
-    font-size:.75rem; padding:4px 10px; border-radius:999px;
-    background:color-mix(in srgb, var(--accent) 14%, transparent);
-    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    font-family:var(--font-mono); font-size:.7rem; padding:3px 9px; border-radius:5px;
+    background:color-mix(in srgb, var(--accent) 10%, transparent);
+    color:var(--accent); border:1px solid color-mix(in srgb, var(--accent) 28%, transparent);
   }
-  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:16px;}
 
-  .about-list{margin-top:18px; color:var(--text-1); line-height:1.9;}
-  .about-list li{margin-left:18px;}
+  .featured{margin-bottom:16px;}
+  .featured .tag-featured{
+    font-family:var(--font-mono); font-size:.7rem; color:var(--ok); margin-bottom:10px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .featured .tag-featured .dot{width:6px; height:6px; border-radius:50%; background:var(--ok); box-shadow:0 0 6px var(--ok);}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:680px){.grid2{grid-template-columns:1fr;}}
 
-  .skills-grid{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;}
+  .about-list{margin-top:20px; display:flex; flex-direction:column; gap:10px;}
+  .about-list .row{
+    display:flex; gap:12px; align-items:baseline; color:var(--text-1); font-size:.92rem; line-height:1.55;
+  }
+  .about-list .row .mk{font-family:var(--font-mono); color:var(--accent); flex-shrink:0;}
+
+  .bring-list{display:flex; flex-direction:column;}
+  .bring-row{
+    display:grid; grid-template-columns:220px 1fr; gap:24px; padding:20px 0;
+    border-top:1px solid var(--border-soft);
+  }
+  .bring-row:last-child{border-bottom:1px solid var(--border-soft);}
+  .bring-row h3{font-family:var(--font-display); font-size:1rem; font-weight:600; color:var(--text-0);}
+  .bring-row .tagline{font-family:var(--font-mono); font-size:.72rem; color:var(--accent); margin-top:4px;}
+  .bring-row p{color:var(--text-1); font-size:.92rem; line-height:1.6;}
+  @media (max-width:680px){.bring-row{grid-template-columns:1fr; gap:8px;}}
+
+  .skills-group{margin-bottom:22px;}
+  .skills-group .glabel{font-family:var(--font-mono); font-size:.75rem; color:var(--text-2); margin-bottom:10px;}
+  .skills-grid{display:flex; flex-wrap:wrap; gap:9px;}
   .skill-chip{
-    padding:8px 16px; border-radius:10px; background:var(--card);
-    border:1px solid var(--border); font-size:.9rem;
+    padding:7px 14px; border-radius:6px; background:var(--bg-raised);
+    border:1px solid var(--border); font-size:.85rem; color:var(--text-0);
   }
+  .skill-chip.dev{color:var(--text-1); border-style:dashed;}
 
   footer{
-    text-align:center; padding:50px 24px 70px; color:var(--text-1); font-size:.9rem;
+    text-align:center; padding:60px 24px 80px; color:var(--text-2); font-size:.85rem;
+    font-family:var(--font-mono);
   }
-  footer a{color:var(--accent); text-decoration:none; font-weight:600;}
+  footer .status{
+    display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;
+    padding:6px 14px; border:1px solid var(--border); border-radius:999px; font-size:.75rem;
+  }
+  footer .status .dot{width:6px; height:6px; border-radius:50%; background:var(--ok); box-shadow:0 0 6px var(--ok);}
+  footer a{color:var(--accent); text-decoration:none;}
   footer a:hover{text-decoration:underline;}
 
   @media (max-width:640px){
     nav{padding:14px 18px;}
-    nav ul{gap:12px;}
-    section{padding-top:100px;}
+    nav ul{gap:14px;}
+    section{padding-top:88px;}
   }
 </style>
 </head>
-<body data-theme="dark">
-
-<canvas id="bgcanvas"></canvas>
+<body>
 
 <nav>
-  <div class="brand">FV</div>
+  <div class="brand-group">
+    <span class="brand-name">Facu</span>
+    <button class="brand copy-email" id="copyEmail" data-i18n-title="nav.copyTitle" title="Copy email to clipboard">
+      <span class="dot"></span><span class="email-text">villanueva.facundo.nicolas@gmail.com</span><span class="copy-icon" aria-hidden="true">⧉</span>
+    </button>
+  </div>
   <ul id="navlinks">
-    <li><button data-target="about">About</button></li>
-    <li><button data-target="projects">Projects</button></li>
-    <li><button data-target="services">Services</button></li>
-    <li><button data-target="skills">Skills</button></li>
-    <li><button data-target="contact">Contact</button></li>
+    <li><button data-target="about" data-i18n="nav.about">about</button></li>
+    <li><button data-target="projects" data-i18n="nav.projects">projects</button></li>
+    <li><button data-target="bring" data-i18n="nav.bring">what-i-bring</button></li>
+    <li><button data-target="manifesto" data-i18n="nav.why">why</button></li>
+    <li><button data-target="skills" data-i18n="nav.skills">skills</button></li>
+    <li><button data-target="contact" data-i18n="nav.contact">contact</button></li>
+    <li>
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="Toggle language / Cambiar idioma">
+        <span class="lang-en" data-lang-label="en">EN</span><span class="sep">/</span><span class="lang-es" data-lang-label="es">ES</span>
+      </button>
+    </li>
   </ul>
-  <button id="theme-toggle">🌙 Dark</button>
 </nav>
 
 <section class="hero" id="hero">
-  <div class="hi">Hi there,</div>
-  <h1>I'm <span>Facu Villanueva</span></h1>
-  <div class="role"><span id="typewriter"></span></div>
-  <div class="scroll-hint">About me<span class="arrow">↓</span></div>
+  <div class="boot mono" id="boot"></div>
+  <h1>Facu Villanueva</h1>
+  <div class="role-line"><span id="typewriter"></span><span class="cursor">_</span></div>
+  <p class="thesis" data-i18n="hero.thesis">My obsession is simple: help build the best teams. I direct AI systems to make that real — for how I hire, evaluate talent, and operate at scale. Not demos.</p>
+  <div class="hero-cta">
+    <a class="btn" href="mailto:villanueva.facundo.nicolas@gmail.com" data-i18n="hero.getInTouch">Get in touch →</a>
+    <a class="btn btn-ghost" href="https://www.linkedin.com/in/facundo-nicolas-villanueva/" target="_blank" rel="noopener">LinkedIn</a>
+    <button class="btn btn-ghost" data-target="manifesto" data-i18n="hero.whyBtn">Why this isn't just a job to me →</button>
+  </div>
+  <div class="scroll-hint"><span data-i18n="hero.scroll">scroll</span><span class="arrow">↓</span></div>
 </section>
 
 <section id="about">
-  <h2 class="section-title">About Me</h2>
-  <p class="section-sub">HR professional turned AI Engineer, building AI-powered recruiting products.</p>
-  <div class="card">
-    <p>
-      I started in Human Resources and moved deliberately into AI engineering, now working in a
-      hybrid HR/tech role while building an AI recruiting startup on my own. That path gives me
-      something most engineers don't have: first-hand understanding of how hiring actually breaks,
-      combined with the ability to build the software that fixes it.
-    </p>
-    <ul class="about-list">
-      <li>Designing and building an AI-native Applicant Tracking System from scratch</li>
-      <li>Shipping full-stack products end-to-end — product, design and code</li>
-      <li>Integrating LLMs into real operational workflows, not just demos</li>
-      <li>Automating content, recruiting and internal ops pipelines with AI agents</li>
-    </ul>
+  <div class="eyebrow"><span class="idx">01</span> <span data-i18n="about.eyebrow">[ABOUT]</span></div>
+  <h2 class="h" data-i18n="about.h">I help build the best teams</h2>
+  <p class="lede" data-i18n="about.lede">I started in Human Resources and moved deliberately toward AI engineering — not to become a developer, but because the systems I needed to build great teams didn't exist yet. So I direct AI to build them.</p>
+  <div class="about-list">
+    <div class="row"><span class="mk">→</span><span data-i18n="about.row1">Architecting AI systems that make hiring and team decisions faster and more accurate — orchestration, evaluation loops, audit trails.</span></div>
+    <div class="row"><span class="mk">→</span><span data-i18n="about.row2">Directing AI-built software end-to-end to solve real team-building problems — product thinking, specification and verification, not hands-on code.</span></div>
+    <div class="row"><span class="mk">→</span><span data-i18n="about.row3">Integrating LLMs into real operational hiring workflows, not just demos.</span></div>
+    <div class="row"><span class="mk">→</span><span data-i18n="about.row4">5+ years running real recruitment operations — so I know exactly what makes a team work, not just what looks good on a slide.</span></div>
   </div>
 </section>
 
 <section id="projects">
-  <h2 class="section-title">Projects</h2>
-  <p class="section-sub">Things I've been building.</p>
-  <div class="grid">
-    <div class="card">
-      <h3>WorkPulse</h3>
-      <p>AI-native Applicant Tracking System built from the ground up, with a dark-native
-      product design and a focus on making recruiting workflows faster and less manual.</p>
-      <div class="tags"><span class="tag">ATS</span><span class="tag">AI Recruiting</span><span class="tag">Product Design</span></div>
+  <div class="eyebrow"><span class="idx">02</span> <span data-i18n="projects.eyebrow">[PROJECTS]</span></div>
+  <h2 class="h" data-i18n="projects.h">Proof, not theory</h2>
+  <p class="lede" data-i18n="projects.lede">Everything here exists because it makes a team's hiring sharper, faster, or more reliable — not because it looks good in a portfolio.</p>
+
+  <div class="card featured">
+    <div class="tag-featured"><span class="dot"></span><span data-i18n="projects.people.tag">IN BUILD &mdash; FULL HRIS</span></div>
+    <h3>People</h3>
+    <p data-i18n="projects.people.p">Not another ATS bolted onto a point tool — a full HRIS built where legacy providers show their cracks: real multi-tenant architecture instead of a workspace hack, workflows that adapt per team instead of forcing everyone into one template, and a data model designed from day one to scale a growing team, not just log headcount. The ATS below is one module of it.</p>
+    <div class="tags"><span class="tag">HRIS</span><span class="tag">Multi-Tenant</span><span class="tag" data-i18n="projects.people.tag3">Team Scaling</span></div>
+  </div>
+
+  <div class="card featured">
+    <div class="tag-featured"><span class="dot"></span><span data-i18n="projects.ats.tag">ACTIVE &mdash; RUNS MY HIRING</span></div>
+    <h3 data-i18n="projects.ats.h">Applicant Tracking System</h3>
+    <p data-i18n="projects.ats.p">Built from scratch to run a real hiring pipeline the way building the best team actually requires: full per-role pipeline customization, multi-tenant data isolation, and a dense, information-first interface for daily operational use — not a demo, a tool I run every week.</p>
+    <div class="tags"><span class="tag">ATS</span><span class="tag">Multi-Tenant</span><span class="tag" data-i18n="projects.ats.tag3">Product Design</span></div>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="projects.gov.h">AI Governance Harness</h3>
+    <p data-i18n="projects.gov.p">An operational framework for running autonomous AI agents safely in production: scoped permission boundaries, a kill-switch, versioned decision logs, rollback strategy, and staged promotion gates before any agent runs unattended — because the tools behind a team deserve the same rigor as the team itself.</p>
+    <div class="tags"><span class="tag" data-i18n="projects.gov.tag1">Agent Orchestration</span><span class="tag" data-i18n="projects.gov.tag2">Governance</span><span class="tag">Evals</span></div>
+    <a class="card-link" href="https://github.com/villanuevafacundonicolas/claude-harness-template" target="_blank" rel="noopener" data-i18n="projects.gov.link">→ Fork it, replicate it</a>
+  </div>
+
+  <div class="projects-cta">
+    <p data-i18n="projects.cta.p">Hiring, or want to see how any of this actually works? I'll walk you through it.</p>
+    <a class="btn" href="mailto:villanueva.facundo.nicolas@gmail.com?subject=Let%27s%20talk" data-i18n="projects.cta.btn">Contact me →</a>
+  </div>
+</section>
+
+<section id="bring">
+  <div class="eyebrow"><span class="idx">03</span> <span data-i18n="bring.eyebrow">[WHAT-I-BRING]</span></div>
+  <h2 class="h" data-i18n="bring.h">Know-how, not a service menu</h2>
+  <p class="lede" data-i18n="bring.lede">This is what actually goes into building a great team — the operational skill set behind everything above.</p>
+  <div class="bring-list">
+    <div class="bring-row">
+      <div><h3 data-i18n="bring.r1.h">Technical Recruiting, IT Market</h3><div class="tagline" data-i18n="bring.r1.tag">core specialty</div></div>
+      <p data-i18n="bring.r1.p">5+ years recruiting IT profiles end-to-end — sourcing, technical screening, interview loops, offers, and onboarding. ~110 recruitment processes in 2025 alone, 200+ interviews conducted, 45 hires delivered across technical, leadership, and business roles for 10+ product and consulting teams. I know how to evaluate a technical profile I don't personally code — through structured screening, the right interviewers, and reading signal from how a candidate reasons, not just keywords on a CV.</p>
     </div>
-    <div class="card">
-      <h3>Cardón Slug</h3>
-      <p>A Metal Slug-style arcade game set in Salta, built as a hands-on learning project
-      for game development and AI-assisted engineering — single-file canvas and JS.</p>
-      <div class="tags"><span class="tag">Canvas</span><span class="tag">JavaScript</span><span class="tag">Gamedev</span></div>
+    <div class="bring-row">
+      <div><h3 data-i18n="bring.r2.h">AI Governance &amp; Agent Orchestration</h3><div class="tagline" data-i18n="bring.r2.tag">core discipline</div></div>
+      <p data-i18n="bring.r2.p">Designing operational frameworks for autonomous AI agents: permission scoping, kill-switches, versioned decision logs, rollback strategy, staged promotion gates, and cross-provider model fallback so agent work stays safe running unattended.</p>
     </div>
-    <div class="card">
-      <h3>MaroteApp</h3>
-      <p>A playful psychometric assessment MVP, designed to make evaluation feel less like a
-      test and more like a game.</p>
-      <div class="tags"><span class="tag">Psychometrics</span><span class="tag">MVP</span></div>
+    <div class="bring-row">
+      <div><h3 data-i18n="bring.r3.h">Spec-Driven AI Delivery</h3><div class="tagline" data-i18n="bring.r3.tag">how I build</div></div>
+      <p data-i18n="bring.r3.p">I don't write code by hand. I direct AI systems to build production software through precise technical specification, staged builds, and rigorous, evidence-based verification — I know exactly what "done" looks like before I delegate it.</p>
     </div>
-    <div class="card">
-      <h3>Content Pipeline</h3>
-      <p>An autonomous content engine that drafts, self-reviews and organizes marketing
-      content on a schedule, with a human sign-off before anything goes out.</p>
-      <div class="tags"><span class="tag">AI Agents</span><span class="tag">Automation</span></div>
+    <div class="bring-row">
+      <div><h3 data-i18n="bring.r4.h">Multi-Agent Evals &amp; Cost Discipline</h3><div class="tagline" data-i18n="bring.r4.tag">quality control</div></div>
+      <p data-i18n="bring.r4.p">Evaluation loops that check AI output before it ships, plus cost/risk-aware model selection — fallback ladders and escalation rules instead of trusting a single model blindly.</p>
+    </div>
+    <div class="bring-row">
+      <div><h3 data-i18n="bring.r5.h">HR Domain Fluency, Applied</h3><div class="tagline" data-i18n="bring.r5.tag">the edge most builders lack</div></div>
+      <p data-i18n="bring.r5.p">Beyond recruiting: onboarding, employee engagement, and day-to-day HR operations experience shapes how I direct AI systems — I know what actually changes a hiring or people team's daily workflow, not just what looks good in a demo.</p>
+    </div>
+    <div class="bring-row">
+      <div><h3 data-i18n="bring.r6.h">Recruitment Automation, in Production</h3><div class="tagline" data-i18n="bring.r6.tag">shipped, not theoretical</div></div>
+      <p data-i18n="bring.r6.p">Automated workflows (Power Automate, Microsoft connectors) already running inside a real hiring operation: email triggers, candidate follow-ups, and recruitment-data traceability across the pipeline.</p>
+    </div>
+    <div class="bring-row">
+      <div><h3 data-i18n="bring.r7.h">Data Fluency</h3><div class="tagline" data-i18n="bring.r7.tag">in progress</div></div>
+      <p data-i18n="bring.r7.p">Building working fluency in Power BI and HR analytics to ground AI-directed automation in real operational numbers, not assumptions.</p>
     </div>
   </div>
 </section>
 
-<section id="services">
-  <h2 class="section-title">Services</h2>
-  <p class="section-sub">What I can help you build</p>
-  <div class="grid">
-    <div class="card">
-      <h3>AI Recruiting Systems</h3>
-      <p>ATS and recruiting-tool design and development, built around how hiring teams
-      actually work — not a generic template.</p>
-    </div>
-    <div class="card">
-      <h3>HR + AI Consulting</h3>
-      <p>Bringing an HR practitioner's perspective to AI adoption in people operations —
-      what to automate, what not to, and why.</p>
-    </div>
-    <div class="card">
-      <h3>Full-Stack Product Development</h3>
-      <p>End-to-end delivery from product thinking to shipped code — frontend, backend and
-      deployment.</p>
-    </div>
-    <div class="card">
-      <h3>AI Workflow Automation</h3>
-      <p>Agent-driven pipelines for content, ops and internal tooling, wired into the tools
-      teams already use.</p>
-    </div>
+<section id="manifesto">
+  <div class="eyebrow"><span class="idx">04</span> <span data-i18n="manifesto.eyebrow">[WHY]</span></div>
+  <h2 class="h" data-i18n="manifesto.h">Why this isn't just a job to me</h2>
+  <p class="lede" data-i18n="manifesto.lede">I've watched good teams get built by accident and bad ones get built on purpose — by whoever happened to be understaffed that quarter, not by anyone who actually thought about it. That gap is what I care about closing. Everything else on this page is downstream of that.</p>
+  <div class="about-list">
+    <div class="row"><span class="mk">→</span><span data-i18n="manifesto.row1">A team isn't a headcount number, and a hire isn't a checkbox at the end of a funnel. A pipeline is a series of judgment calls — most hiring tools are built to hide that, not support it.</span></div>
+    <div class="row"><span class="mk">→</span><span data-i18n="manifesto.row2">I don't build software to prove I can direct AI. I build it because the tools recruiters get handed were built by people who never sat in the chair, and it shows in what gets missed every day.</span></div>
+    <div class="row"><span class="mk">→</span><span data-i18n="manifesto.row3">Technology serves people, not the other way around. If a system makes a hiring decision faster but worse, it's not done — it's just fast.</span></div>
+    <div class="row"><span class="mk">→</span><span data-i18n="manifesto.row4">I'm not trying to sell you a SaaS on this page. Selling comes later, if at all. What I actually want is to compare notes with anyone building something real — a team, a product, a company — because how you build the team is the ceiling on everything else you build.</span></div>
   </div>
 </section>
 
 <section id="skills">
-  <h2 class="section-title">Skills</h2>
-  <p class="section-sub">Technologies & tools I work with</p>
-  <div class="skills-grid">
-    <span class="skill-chip">JavaScript</span>
-    <span class="skill-chip">TypeScript</span>
-    <span class="skill-chip">Python</span>
-    <span class="skill-chip">Next.js</span>
-    <span class="skill-chip">Vercel</span>
-    <span class="skill-chip">Claude / LLMs</span>
-    <span class="skill-chip">AI Agent Systems</span>
-    <span class="skill-chip">Notion API</span>
-    <span class="skill-chip">Automation Pipelines</span>
-    <span class="skill-chip">Recruiting Tech / ATS</span>
-    <span class="skill-chip">HR Operations</span>
-    <span class="skill-chip">Product Design</span>
-    <span class="skill-chip">Git / GitHub</span>
+  <div class="eyebrow"><span class="idx">05</span> <span data-i18n="skills.eyebrow">[SKILLS]</span></div>
+  <h2 class="h" data-i18n="skills.h">Stack &amp; tools</h2>
+
+  <div class="skills-group">
+    <div class="glabel" data-i18n="skills.g1">// AI &amp; AGENT SYSTEMS</div>
+    <div class="skills-grid">
+      <span class="skill-chip">Claude / Claude Code</span>
+      <span class="skill-chip">opencode</span>
+      <span class="skill-chip" data-i18n="skills.g1.c3">Multi-Agent Orchestration</span>
+      <span class="skill-chip" data-i18n="skills.g1.c4">Agent Evals &amp; Fallback Design</span>
+      <span class="skill-chip" data-i18n="skills.g1.c5">Spec-Driven Development</span>
+      <span class="skill-chip" data-i18n="skills.g1.c6">Governance &amp; Audit Design</span>
+    </div>
+  </div>
+
+  <div class="skills-group">
+    <div class="glabel" data-i18n="skills.g2">// AUTOMATION &amp; DEPLOY</div>
+    <div class="skills-grid">
+      <span class="skill-chip">Microsoft Power Automate</span>
+      <span class="skill-chip">Make</span>
+      <span class="skill-chip">Notion API</span>
+      <span class="skill-chip" data-i18n="skills.g2.c4">Vercel (Deploy &amp; Config)</span>
+    </div>
+  </div>
+
+  <div class="skills-group">
+    <div class="glabel" data-i18n="skills.g3">// DATA (DEVELOPING)</div>
+    <div class="skills-grid">
+      <span class="skill-chip dev">Power BI</span>
+      <span class="skill-chip dev" data-i18n="skills.g3.c2">HR Data Analytics</span>
+    </div>
+  </div>
+
+  <div class="skills-group">
+    <div class="glabel" data-i18n="skills.g4">// RECRUITING &amp; HR</div>
+    <div class="skills-grid">
+      <span class="skill-chip" data-i18n="skills.g4.c1">ATS Platforms</span>
+      <span class="skill-chip">LinkedIn Recruiter</span>
+      <span class="skill-chip" data-i18n="skills.g4.c3">Sourcing &amp; Pipeline Management</span>
+      <span class="skill-chip" data-i18n="skills.g4.c4">Stakeholder Management</span>
+    </div>
   </div>
 </section>
 
 <section id="contact">
-  <h2 class="section-title">Contact</h2>
-  <p class="section-sub">Get in touch — I'd love to hear from you</p>
-  <div class="card">
-    <h3>Email</h3>
-    <p><a href="mailto:villanueva.facundo.nicolas@gmail.com" style="color:var(--accent); text-decoration:none;">villanueva.facundo.nicolas@gmail.com</a></p>
+  <div class="eyebrow"><span class="idx">06</span> <span data-i18n="contact.eyebrow">[CONTACT]</span></div>
+  <h2 class="h" data-i18n="contact.h">Get in touch</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Email</h3>
+      <p><a href="mailto:villanueva.facundo.nicolas@gmail.com" style="color:var(--accent);">villanueva.facundo.nicolas@gmail.com</a></p>
+    </div>
+    <div class="card">
+      <h3>LinkedIn</h3>
+      <p><a href="https://www.linkedin.com/in/facundo-nicolas-villanueva/" target="_blank" rel="noopener" style="color:var(--accent);">facundo-nicolas-villanueva</a></p>
+    </div>
   </div>
 </section>
 
 <footer>
-  Built by <a href="mailto:villanueva.facundo.nicolas@gmail.com">Facu Villanueva</a> · updated as I keep shipping
+  <div class="status"><span class="dot"></span><span data-i18n="footer.status">let's talk — I'd love to look at your people engine and how to scale it</span></div>
+  <div data-i18n="footer.built">built by <a href="mailto:villanueva.facundo.nicolas@gmail.com">facu villanueva</a> · updated as I keep shipping</div>
 </footer>
 
 <script>
-  // Typewriter
-  const roles = ["HR → AI Engineer", "AI Recruiting Builder", "Full-Stack Developer", "Solo Founder"];
+  // ---------- i18n ----------
+  const I18N = {
+    en: {
+      title: "Facu Villanueva — Operator Log",
+      description: "Facu Villanueva — I help build the best teams. HR practitioner directing AI-built systems to make it real.",
+      "nav.copyTitle": "Copy email to clipboard",
+      "nav.about": "about",
+      "nav.projects": "projects",
+      "nav.bring": "what-i-bring",
+      "nav.why": "why",
+      "nav.skills": "skills",
+      "nav.contact": "contact",
+      boot: [
+        "&gt; initializing operator profile...",
+        "&gt; loading governance harness... <span class=\"ok\">OK</span>",
+        "&gt; agents: orchestrated, not written by hand",
+        "&gt; ready."
+      ],
+      roles: ["I Build The Best Teams", "HR → AI-Driven Builder", "Multi-Agent Systems Architect", "Tech Recruiter"],
+      "hero.thesis": "My obsession is simple: help build the best teams. I direct AI systems to make that real — for how I hire, evaluate talent, and operate at scale. Not demos.",
+      "hero.getInTouch": "Get in touch →",
+      "hero.whyBtn": "Why this isn't just a job to me →",
+      "hero.scroll": "scroll",
+      "about.eyebrow": "[ABOUT]",
+      "about.h": "I help build the best teams",
+      "about.lede": "I started in Human Resources and moved deliberately toward AI engineering — not to become a developer, but because the systems I needed to build great teams didn't exist yet. So I direct AI to build them.",
+      "about.row1": "Architecting AI systems that make hiring and team decisions faster and more accurate — orchestration, evaluation loops, audit trails.",
+      "about.row2": "Directing AI-built software end-to-end to solve real team-building problems — product thinking, specification and verification, not hands-on code.",
+      "about.row3": "Integrating LLMs into real operational hiring workflows, not just demos.",
+      "about.row4": "5+ years running real recruitment operations — so I know exactly what makes a team work, not just what looks good on a slide.",
+      "projects.eyebrow": "[PROJECTS]",
+      "projects.h": "Proof, not theory",
+      "projects.lede": "Everything here exists because it makes a team's hiring sharper, faster, or more reliable — not because it looks good in a portfolio.",
+      "projects.people.tag": "IN BUILD &mdash; FULL HRIS",
+      "projects.people.p": "Not another ATS bolted onto a point tool — a full HRIS built where legacy providers show their cracks: real multi-tenant architecture instead of a workspace hack, workflows that adapt per team instead of forcing everyone into one template, and a data model designed from day one to scale a growing team, not just log headcount. The ATS below is one module of it.",
+      "projects.people.tag3": "Team Scaling",
+      "projects.ats.tag": "ACTIVE &mdash; RUNS MY HIRING",
+      "projects.ats.h": "Applicant Tracking System",
+      "projects.ats.p": "Built from scratch to run a real hiring pipeline the way building the best team actually requires: full per-role pipeline customization, multi-tenant data isolation, and a dense, information-first interface for daily operational use — not a demo, a tool I run every week.",
+      "projects.ats.tag3": "Product Design",
+      "projects.gov.h": "AI Governance Harness",
+      "projects.gov.p": "An operational framework for running autonomous AI agents safely in production: scoped permission boundaries, a kill-switch, versioned decision logs, rollback strategy, and staged promotion gates before any agent runs unattended — because the tools behind a team deserve the same rigor as the team itself.",
+      "projects.gov.tag1": "Agent Orchestration",
+      "projects.gov.tag2": "Governance",
+      "projects.gov.link": "→ Fork it, replicate it",
+      "projects.cta.p": "Hiring, or want to see how any of this actually works? I'll walk you through it.",
+      "projects.cta.btn": "Contact me →",
+      "bring.eyebrow": "[WHAT-I-BRING]",
+      "bring.h": "Know-how, not a service menu",
+      "bring.lede": "This is what actually goes into building a great team — the operational skill set behind everything above.",
+      "bring.r1.h": "Technical Recruiting, IT Market",
+      "bring.r1.tag": "core specialty",
+      "bring.r1.p": "5+ years recruiting IT profiles end-to-end — sourcing, technical screening, interview loops, offers, and onboarding. ~110 recruitment processes in 2025 alone, 200+ interviews conducted, 45 hires delivered across technical, leadership, and business roles for 10+ product and consulting teams. I know how to evaluate a technical profile I don't personally code — through structured screening, the right interviewers, and reading signal from how a candidate reasons, not just keywords on a CV.",
+      "bring.r2.h": "AI Governance &amp; Agent Orchestration",
+      "bring.r2.tag": "core discipline",
+      "bring.r2.p": "Designing operational frameworks for autonomous AI agents: permission scoping, kill-switches, versioned decision logs, rollback strategy, staged promotion gates, and cross-provider model fallback so agent work stays safe running unattended.",
+      "bring.r3.h": "Spec-Driven AI Delivery",
+      "bring.r3.tag": "how I build",
+      "bring.r3.p": "I don't write code by hand. I direct AI systems to build production software through precise technical specification, staged builds, and rigorous, evidence-based verification — I know exactly what \"done\" looks like before I delegate it.",
+      "bring.r4.h": "Multi-Agent Evals &amp; Cost Discipline",
+      "bring.r4.tag": "quality control",
+      "bring.r4.p": "Evaluation loops that check AI output before it ships, plus cost/risk-aware model selection — fallback ladders and escalation rules instead of trusting a single model blindly.",
+      "bring.r5.h": "HR Domain Fluency, Applied",
+      "bring.r5.tag": "the edge most builders lack",
+      "bring.r5.p": "Beyond recruiting: onboarding, employee engagement, and day-to-day HR operations experience shapes how I direct AI systems — I know what actually changes a hiring or people team's daily workflow, not just what looks good in a demo.",
+      "bring.r6.h": "Recruitment Automation, in Production",
+      "bring.r6.tag": "shipped, not theoretical",
+      "bring.r6.p": "Automated workflows (Power Automate, Microsoft connectors) already running inside a real hiring operation: email triggers, candidate follow-ups, and recruitment-data traceability across the pipeline.",
+      "bring.r7.h": "Data Fluency",
+      "bring.r7.tag": "in progress",
+      "bring.r7.p": "Building working fluency in Power BI and HR analytics to ground AI-directed automation in real operational numbers, not assumptions.",
+      "manifesto.eyebrow": "[WHY]",
+      "manifesto.h": "Why this isn't just a job to me",
+      "manifesto.lede": "I've watched good teams get built by accident and bad ones get built on purpose — by whoever happened to be understaffed that quarter, not by anyone who actually thought about it. That gap is what I care about closing. Everything else on this page is downstream of that.",
+      "manifesto.row1": "A team isn't a headcount number, and a hire isn't a checkbox at the end of a funnel. A pipeline is a series of judgment calls — most hiring tools are built to hide that, not support it.",
+      "manifesto.row2": "I don't build software to prove I can direct AI. I build it because the tools recruiters get handed were built by people who never sat in the chair, and it shows in what gets missed every day.",
+      "manifesto.row3": "Technology serves people, not the other way around. If a system makes a hiring decision faster but worse, it's not done — it's just fast.",
+      "manifesto.row4": "I'm not trying to sell you a SaaS on this page. Selling comes later, if at all. What I actually want is to compare notes with anyone building something real — a team, a product, a company — because how you build the team is the ceiling on everything else you build.",
+      "skills.eyebrow": "[SKILLS]",
+      "skills.h": "Stack &amp; tools",
+      "skills.g1": "// AI &amp; AGENT SYSTEMS",
+      "skills.g1.c3": "Multi-Agent Orchestration",
+      "skills.g1.c4": "Agent Evals &amp; Fallback Design",
+      "skills.g1.c5": "Spec-Driven Development",
+      "skills.g1.c6": "Governance &amp; Audit Design",
+      "skills.g2": "// AUTOMATION &amp; DEPLOY",
+      "skills.g2.c4": "Vercel (Deploy &amp; Config)",
+      "skills.g3": "// DATA (DEVELOPING)",
+      "skills.g3.c2": "HR Data Analytics",
+      "skills.g4": "// RECRUITING &amp; HR",
+      "skills.g4.c1": "ATS Platforms",
+      "skills.g4.c3": "Sourcing &amp; Pipeline Management",
+      "skills.g4.c4": "Stakeholder Management",
+      "contact.eyebrow": "[CONTACT]",
+      "contact.h": "Get in touch",
+      "footer.status": "let's talk — I'd love to look at your people engine and how to scale it",
+      "footer.built": "built by <a href=\"mailto:villanueva.facundo.nicolas@gmail.com\">facu villanueva</a> · updated as I keep shipping"
+    },
+    es: {
+      title: "Facu Villanueva — Bitácora del Operador",
+      description: "Facu Villanueva — Ayudo a armar los mejores equipos. HR que dirige sistemas de IA para hacerlo realidad.",
+      "nav.copyTitle": "Copiar email al portapapeles",
+      "nav.about": "sobre mí",
+      "nav.projects": "proyectos",
+      "nav.bring": "lo que aporto",
+      "nav.why": "por qué",
+      "nav.skills": "skills",
+      "nav.contact": "contacto",
+      boot: [
+        "&gt; inicializando perfil de operador...",
+        "&gt; cargando arnés de gobernanza... <span class=\"ok\">OK</span>",
+        "&gt; agentes: orquestados, no escritos a mano",
+        "&gt; listo."
+      ],
+      roles: ["Armo Los Mejores Equipos", "HR → Builder Dirigido por IA", "Arquitecto de Sistemas Multi-Agente", "Tech Recruiter"],
+      "hero.thesis": "Mi obsesión es simple: ayudar a armar los mejores equipos. Dirijo sistemas de IA para hacerlo realidad — en cómo contrato, evalúo talento y opero a escala. Nada de demos.",
+      "hero.getInTouch": "Escribime →",
+      "hero.whyBtn": "Por qué esto no es un laburo más para mí →",
+      "hero.scroll": "scroll",
+      "about.eyebrow": "[SOBRE MÍ]",
+      "about.h": "Ayudo a armar los mejores equipos",
+      "about.lede": "Empecé en Recursos Humanos y me moví deliberadamente hacia la ingeniería de IA — no para volverme developer, sino porque los sistemas que necesitaba para armar grandes equipos todavía no existían. Así que dirijo IA para construirlos.",
+      "about.row1": "Diseño sistemas de IA que hacen que las decisiones de contratación y de equipo sean más rápidas y precisas — orquestación, loops de evaluación, trazabilidad.",
+      "about.row2": "Dirijo software construido con IA de punta a punta para resolver problemas reales de armado de equipos — pensamiento de producto, especificación y verificación, no código a mano.",
+      "about.row3": "Integro LLMs en flujos operativos reales de contratación, no solo demos.",
+      "about.row4": "5+ años dirigiendo operaciones de reclutamiento reales — así que sé exactamente qué hace funcionar a un equipo, no solo qué queda bien en una slide.",
+      "projects.eyebrow": "[PROYECTOS]",
+      "projects.h": "Pruebas, no teoría",
+      "projects.lede": "Todo lo que hay acá existe porque hace que el reclutamiento de un equipo sea más ágil, rápido o confiable — no porque quede bien en un portfolio.",
+      "projects.people.tag": "EN CONSTRUCCIÓN &mdash; HRIS COMPLETO",
+      "projects.people.p": "No es otro ATS pegado a una herramienta puntual — es un HRIS completo construido donde los proveedores tradicionales muestran sus grietas: arquitectura multi-tenant real en vez de un hack de workspace, flujos que se adaptan por equipo en vez de forzar a todos al mismo template, y un modelo de datos pensado desde el día uno para escalar un equipo que crece, no solo para llevar la cuenta de cabezas. El ATS de abajo es un módulo de esto.",
+      "projects.people.tag3": "Escalado de Equipos",
+      "projects.ats.tag": "ACTIVO &mdash; CORRE MI RECLUTAMIENTO",
+      "projects.ats.h": "Sistema de Seguimiento de Candidatos",
+      "projects.ats.p": "Construido desde cero para correr un pipeline de contratación real como realmente lo exige armar el mejor equipo: personalización total del pipeline por rol, aislamiento multi-tenant de datos, e interfaz densa y centrada en la información para uso operativo diario — no una demo, una herramienta que uso todas las semanas.",
+      "projects.ats.tag3": "Diseño de Producto",
+      "projects.gov.h": "Arnés de Gobernanza de IA",
+      "projects.gov.p": "Un marco operativo para correr agentes de IA autónomos con seguridad en producción: límites de permisos acotados, un interruptor de emergencia, logs de decisiones versionados, estrategia de rollback, y gates de promoción escalonados antes de que cualquier agente corra sin supervisión — porque las herramientas detrás de un equipo merecen el mismo rigor que el equipo mismo.",
+      "projects.gov.tag1": "Orquestación de Agentes",
+      "projects.gov.tag2": "Gobernanza",
+      "projects.gov.link": "→ Forkealo, replicalo",
+      "projects.cta.p": "¿Estás contratando o querés ver cómo funciona esto en serio? Te lo muestro.",
+      "projects.cta.btn": "Escribime →",
+      "bring.eyebrow": "[LO QUE APORTO]",
+      "bring.h": "Know-how, no un menú de servicios",
+      "bring.lede": "Esto es lo que realmente hace falta para armar un gran equipo — el conjunto de habilidades operativas detrás de todo lo de arriba.",
+      "bring.r1.h": "Reclutamiento Técnico, Mercado IT",
+      "bring.r1.tag": "especialidad principal",
+      "bring.r1.p": "5+ años reclutando perfiles IT de punta a punta — sourcing, screening técnico, rondas de entrevista, ofertas y onboarding. ~110 procesos de reclutamiento solo en 2025, 200+ entrevistas realizadas, 45 contrataciones entregadas en roles técnicos, de liderazgo y de negocio para 10+ equipos de producto y consultoría. Sé evaluar un perfil técnico que yo no programo personalmente — con screening estructurado, los entrevistadores correctos, y leyendo la señal de cómo razona un candidato, no solo palabras clave en un CV.",
+      "bring.r2.h": "Gobernanza de IA y Orquestación de Agentes",
+      "bring.r2.tag": "disciplina central",
+      "bring.r2.p": "Diseño marcos operativos para agentes de IA autónomos: límites de permisos, interruptores de emergencia, logs de decisiones versionados, estrategia de rollback, gates de promoción escalonados, y fallback entre proveedores de modelos para que el trabajo del agente sea seguro corriendo sin supervisión.",
+      "bring.r3.h": "Entrega de IA Guiada por Especificación",
+      "bring.r3.tag": "cómo construyo",
+      "bring.r3.p": "No escribo código a mano. Dirijo sistemas de IA para construir software de producción a través de especificación técnica precisa, builds por etapas, y verificación rigurosa basada en evidencia — sé exactamente cómo se ve \"terminado\" antes de delegarlo.",
+      "bring.r4.h": "Evaluaciones Multi-Agente y Disciplina de Costos",
+      "bring.r4.tag": "control de calidad",
+      "bring.r4.p": "Loops de evaluación que chequean la salida de la IA antes de que se publique, más selección de modelos consciente del costo/riesgo — escalas de fallback y reglas de escalamiento en vez de confiar ciegamente en un solo modelo.",
+      "bring.r5.h": "Fluidez en el Dominio de HR, Aplicada",
+      "bring.r5.tag": "la ventaja que a la mayoría de los builders les falta",
+      "bring.r5.p": "Más allá del reclutamiento: la experiencia en onboarding, employee engagement y operaciones de HR del día a día moldea cómo dirijo los sistemas de IA — sé qué es lo que realmente cambia el flujo diario de un equipo de hiring o de people, no solo lo que queda bien en una demo.",
+      "bring.r6.h": "Automatización de Reclutamiento, en Producción",
+      "bring.r6.tag": "entregado, no teórico",
+      "bring.r6.p": "Flujos automatizados (Power Automate, conectores de Microsoft) corriendo ya dentro de una operación de hiring real: triggers de email, seguimiento de candidatos, y trazabilidad de datos de reclutamiento a lo largo del pipeline.",
+      "bring.r7.h": "Fluidez en Datos",
+      "bring.r7.tag": "en progreso",
+      "bring.r7.p": "Construyendo fluidez de trabajo en Power BI y HR analytics para fundamentar la automatización dirigida por IA en números operativos reales, no en supuestos.",
+      "manifesto.eyebrow": "[POR QUÉ]",
+      "manifesto.h": "Por qué esto no es un laburo más para mí",
+      "manifesto.lede": "Vi buenos equipos armarse de casualidad y malos equipos armarse a propósito — por quien haya estado corto de gente ese trimestre, no por alguien que realmente lo pensó. Esa brecha es lo que me importa cerrar. Todo lo demás en esta página viene de ahí.",
+      "manifesto.row1": "Un equipo no es un número de headcount, y una contratación no es un checkbox al final de un funnel. Un pipeline es una serie de decisiones de criterio — la mayoría de las herramientas de hiring están hechas para ocultar eso, no para apoyarlo.",
+      "manifesto.row2": "No construyo software para demostrar que puedo dirigir IA. Lo construyo porque las herramientas que les dan a los recruiters las hizo gente que nunca se sentó en esa silla, y se nota en lo que se pierde todos los días.",
+      "manifesto.row3": "La tecnología está al servicio de las personas, no al revés. Si un sistema hace una decisión de contratación más rápida pero peor, no está terminado — solo es rápido.",
+      "manifesto.row4": "No estoy tratando de venderte un SaaS en esta página. Vender viene después, si es que viene. Lo que realmente quiero es intercambiar ideas con cualquiera que esté armando algo real — un equipo, un producto, una empresa — porque cómo armás el equipo es el techo de todo lo demás que construís.",
+      "skills.eyebrow": "[SKILLS]",
+      "skills.h": "Stack y herramientas",
+      "skills.g1": "// IA Y SISTEMAS DE AGENTES",
+      "skills.g1.c3": "Orquestación Multi-Agente",
+      "skills.g1.c4": "Evals de Agentes y Diseño de Fallback",
+      "skills.g1.c5": "Desarrollo Guiado por Especificación",
+      "skills.g1.c6": "Gobernanza y Diseño de Auditoría",
+      "skills.g2": "// AUTOMATIZACIÓN Y DEPLOY",
+      "skills.g2.c4": "Vercel (Deploy y Config)",
+      "skills.g3": "// DATOS (EN DESARROLLO)",
+      "skills.g3.c2": "HR Data Analytics",
+      "skills.g4": "// RECLUTAMIENTO Y HR",
+      "skills.g4.c1": "Plataformas ATS",
+      "skills.g4.c3": "Sourcing y Gestión de Pipeline",
+      "skills.g4.c4": "Gestión de Stakeholders",
+      "contact.eyebrow": "[CONTACTO]",
+      "contact.h": "Hablemos",
+      "footer.status": "hablemos — me encantaría ver tu motor de personas y cómo escalarlo",
+      "footer.built": "hecho por <a href=\"mailto:villanueva.facundo.nicolas@gmail.com\">facu villanueva</a> · actualizado a medida que sigo shippeando"
+    }
+  };
+
+  function detectDefaultLang(){
+    try{
+      const saved = localStorage.getItem('lang');
+      if(saved === 'en' || saved === 'es') return saved;
+    }catch(e){}
+    return navigator.language && navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
+  }
+
+  let currentLang = detectDefaultLang();
+
+  function applyLang(lang){
+    currentLang = lang;
+    const dict = I18N[lang];
+    document.documentElement.lang = lang;
+    document.title = dict.title;
+    document.getElementById('metaDescription').setAttribute('content', dict.description);
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if(dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const key = el.getAttribute('data-i18n-title');
+      if(dict[key] !== undefined) el.setAttribute('title', dict[key]);
+    });
+
+    document.querySelectorAll('[data-lang-label]').forEach(el => {
+      el.classList.toggle('on', el.getAttribute('data-lang-label') === lang);
+    });
+
+    renderBoot(dict.boot);
+    roles = dict.roles;
+    ri = 0; ci = 0; deleting = false;
+    if(tw) tw.textContent = '';
+
+    try{ localStorage.setItem('lang', lang); }catch(e){}
+  }
+
+  // ---------- Boot sequence ----------
+  const bootEl = document.getElementById('boot');
+  function renderBoot(lines){
+    bootEl.innerHTML = '';
+    lines.forEach((line, i) => {
+      const div = document.createElement('div');
+      div.className = 'line';
+      div.style.animationDelay = (i * 0.38) + 's';
+      div.innerHTML = line;
+      bootEl.appendChild(div);
+    });
+  }
+
+  // ---------- Typewriter (role rotator) ----------
+  let roles = I18N[currentLang].roles;
   const tw = document.getElementById('typewriter');
-  let ri = 0, ci = 0, deleting = false;
+  let ri = 0, ci = 0, deleting = false, twStarted = false;
   function tick(){
     const word = roles[ri];
     if(!deleting){
       ci++;
       tw.textContent = word.slice(0, ci);
-      if(ci === word.length){ deleting = true; setTimeout(tick, 1400); return; }
+      if(ci === word.length){ deleting = true; setTimeout(tick, 1500); return; }
     } else {
       ci--;
       tw.textContent = word.slice(0, ci);
@@ -272,64 +687,53 @@
     }
     setTimeout(tick, deleting ? 45 : 85);
   }
-  tick();
+  function startTypewriterOnce(){
+    if(twStarted) return;
+    twStarted = true;
+    setTimeout(tick, 2150);
+  }
 
-  // Nav scroll spy + smooth nav
-  const buttons = document.querySelectorAll('#navlinks button');
-  buttons.forEach(b => b.addEventListener('click', () => {
+  // Initial render in the resolved language
+  applyLang(currentLang);
+  startTypewriterOnce();
+
+  // Language toggle button
+  document.getElementById('langToggle').addEventListener('click', () => {
+    applyLang(currentLang === 'en' ? 'es' : 'en');
+  });
+
+  // ---------- Copy email to clipboard ----------
+  const copyBtn = document.getElementById('copyEmail');
+  const emailText = 'villanueva.facundo.nicolas@gmail.com';
+  copyBtn.addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(emailText);
+    }catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = emailText; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+    }
+    const icon = copyBtn.querySelector('.copy-icon');
+    const prev = icon.textContent;
+    icon.textContent = '✓';
+    copyBtn.classList.add('copied');
+    setTimeout(() => { icon.textContent = prev; copyBtn.classList.remove('copied'); }, 1600);
+  });
+
+  // ---------- Nav scroll spy + smooth nav ----------
+  const navButtons = document.querySelectorAll('[data-target]');
+  navButtons.forEach(b => b.addEventListener('click', () => {
     document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});
   }));
   const sections = [...document.querySelectorAll('section[id]')];
   const spy = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if(e.isIntersecting){
-        buttons.forEach(b => b.classList.toggle('active', b.dataset.target === e.target.id));
+        navButtons.forEach(b => b.classList.toggle('active', b.dataset.target === e.target.id));
       }
     });
   }, {rootMargin:'-40% 0px -50% 0px'});
   sections.forEach(s => spy.observe(s));
-
-  // Theme toggle
-  const toggle = document.getElementById('theme-toggle');
-  toggle.addEventListener('click', () => {
-    const body = document.body;
-    const isDark = body.getAttribute('data-theme') === 'dark';
-    body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    toggle.textContent = isDark ? '☀️ Light' : '🌙 Dark';
-  });
-
-  // Dynamic background: drifting soft particles
-  const canvas = document.getElementById('bgcanvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles;
-  function resize(){
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  function initParticles(){
-    particles = Array.from({length: 55}, () => ({
-      x: Math.random()*W, y: Math.random()*H,
-      r: 0.6 + Math.random()*1.8,
-      vx: (Math.random()-0.5)*0.15,
-      vy: (Math.random()-0.5)*0.15,
-      hue: Math.random() > 0.5 ? '94,225,201' : '124,139,255'
-    }));
-  }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if(p.x < 0) p.x = W; if(p.x > W) p.x = 0;
-      if(p.y < 0) p.y = H; if(p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(${p.hue},0.45)`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize', () => { resize(); initParticles(); });
-  resize(); initParticles(); draw();
 </script>
 </body>
 </html>
