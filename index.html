@@ -98,28 +98,22 @@
 
   /* HERO */
   .hero{min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:80px;}
-  .boot{
-    font-family:var(--font-mono); font-size:.82rem; color:var(--text-2); line-height:1.9;
-    margin-bottom:28px; min-height:6.8em;
-  }
-  .boot .line{opacity:0; animation:fadein .3s forwards;}
-  .boot .ok{color:var(--ok);}
   @keyframes fadein{to{opacity:1;}}
   .hero h1{
     font-family:var(--font-display); font-weight:700;
     font-size:clamp(2.4rem, 7vw, 4.6rem); line-height:1.02; letter-spacing:-.01em;
-    margin-bottom:16px; opacity:0; animation:fadein .5s forwards; animation-delay:1.9s;
+    margin-bottom:16px; opacity:0; animation:fadein .5s forwards; animation-delay:.1s;
   }
   .hero .role-line{
     font-family:var(--font-mono); font-size:clamp(1rem, 2.4vw, 1.25rem); color:var(--accent);
-    min-height:1.6em; opacity:0; animation:fadein .5s forwards; animation-delay:2.15s;
+    min-height:1.6em; opacity:0; animation:fadein .5s forwards; animation-delay:.35s;
   }
   .hero .role-line::before{content:'> '; color:var(--text-2);}
   .hero .role-line .cursor{animation:blink 1s step-end infinite;}
   @keyframes blink{50%{opacity:0;}}
   .hero .thesis{
     max-width:560px; color:var(--text-1); font-size:1.02rem; line-height:1.6; margin-top:22px;
-    opacity:0; animation:fadein .5s forwards; animation-delay:2.4s;
+    opacity:0; animation:fadein .5s forwards; animation-delay:.6s;
   }
   .btn{
     display:inline-flex; align-items:center; gap:8px;
@@ -135,11 +129,11 @@
   .btn-ghost:hover{border-color:var(--accent); box-shadow:none;}
   .hero-cta{
     margin-top:30px; display:flex; gap:12px; flex-wrap:wrap;
-    opacity:0; animation:fadein .5s forwards; animation-delay:2.55s;
+    opacity:0; animation:fadein .5s forwards; animation-delay:.75s;
   }
   .scroll-hint{
     margin-top:44px; color:var(--text-2); font-family:var(--font-mono); font-size:.75rem;
-    opacity:0; animation:fadein .5s forwards; animation-delay:2.75s;
+    opacity:0; animation:fadein .5s forwards; animation-delay:.95s;
   }
   .projects-cta{
     margin-top:22px; padding-top:26px; border-top:1px solid var(--border-soft);
@@ -253,7 +247,6 @@
 </nav>
 
 <section class="hero" id="hero">
-  <div class="boot mono" id="boot"></div>
   <h1>Facu Villanueva</h1>
   <div class="role-line"><span id="typewriter"></span><span class="cursor">_</span></div>
   <p class="thesis" data-i18n="hero.thesis">My obsession is simple: help build the best teams. I direct AI systems to make that real — for how I hire, evaluate talent, and operate at scale. Not demos.</p>
@@ -435,12 +428,6 @@
       "nav.why": "why",
       "nav.skills": "skills",
       "nav.contact": "contact",
-      boot: [
-        "&gt; initializing operator profile...",
-        "&gt; loading governance harness... <span class=\"ok\">OK</span>",
-        "&gt; agents: orchestrated, not written by hand",
-        "&gt; ready."
-      ],
       roles: ["I Build The Best Teams", "HR → AI-Driven Builder", "Multi-Agent Systems Architect", "Tech Recruiter"],
       "hero.thesis": "My obsession is simple: help build the best teams. I direct AI systems to make that real — for how I hire, evaluate talent, and operate at scale. Not demos.",
       "hero.getInTouch": "Get in touch →",
@@ -531,12 +518,6 @@
       "nav.why": "por qué",
       "nav.skills": "skills",
       "nav.contact": "contacto",
-      boot: [
-        "&gt; inicializando perfil de operador...",
-        "&gt; cargando arnés de gobernanza... <span class=\"ok\">OK</span>",
-        "&gt; agentes: orquestados, no escritos a mano",
-        "&gt; listo."
-      ],
       roles: ["Armo Los Mejores Equipos", "HR → Builder Dirigido por IA", "Arquitecto de Sistemas Multi-Agente", "Tech Recruiter"],
       "hero.thesis": "Mi obsesión es simple: ayudar a armar los mejores equipos. Dirijo sistemas de IA para hacerlo realidad — en cómo contrato, evalúo talento y opero a escala. Nada de demos.",
       "hero.getInTouch": "Escribime →",
@@ -649,25 +630,11 @@
       el.classList.toggle('on', el.getAttribute('data-lang-label') === lang);
     });
 
-    renderBoot(dict.boot);
     roles = dict.roles;
     ri = 0; ci = 0; deleting = false;
     if(tw) tw.textContent = '';
 
     try{ localStorage.setItem('lang', lang); }catch(e){}
-  }
-
-  // ---------- Boot sequence ----------
-  const bootEl = document.getElementById('boot');
-  function renderBoot(lines){
-    bootEl.innerHTML = '';
-    lines.forEach((line, i) => {
-      const div = document.createElement('div');
-      div.className = 'line';
-      div.style.animationDelay = (i * 0.38) + 's';
-      div.innerHTML = line;
-      bootEl.appendChild(div);
-    });
   }
 
   // ---------- Typewriter (role rotator) ----------
@@ -690,7 +657,7 @@
   function startTypewriterOnce(){
     if(twStarted) return;
     twStarted = true;
-    setTimeout(tick, 2150);
+    setTimeout(tick, 350);
   }
 
   // Initial render in the resolved language
