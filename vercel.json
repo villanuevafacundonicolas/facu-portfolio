@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/team-builder",
+      "destination": "https://teambuilder-peopleos1.vercel.app",
+      "permanent": false
+    }
+  ]
+}
