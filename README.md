@@ -1,4 +1,4 @@
-# Facu Villanueva — HR/AI Builder
+﻿# Facu Villanueva — HR/AI Builder
 
 **Live → [facuvillanueva.com.ar](https://facuvillanueva.com.ar)**
 
@@ -11,7 +11,7 @@ This repo is the source of my personal site.
 | Project | Status | Link |
 |---|---|---|
 | **People** — full HRIS, real multi-tenant architecture | In build | — |
-| **Applicant Tracking System** — runs my own hiring pipeline every week | Active | [Live demo](https://recruiting-app-peopleos1.vercel.app/demo) |
+| **Applicant Tracking System** — multi-tenant, per-role pipeline customization | Active | [Live demo](https://recruiting-app-peopleos1.vercel.app/demo) |
 | **Team Builder** — proposes role assignments optimizing fit *and* people's happiness; runs 100% in the browser | Free | [Use it](https://facuvillanueva.com.ar/team-builder) · [repo](https://github.com/villanuevafacundonicolas/team-builder) |
 | **AI Governance Harness** — permission scoping, kill-switch, decision logs, rollback, promotion gates for autonomous agents | Open | [Fork it](https://github.com/villanuevafacundonicolas/claude-harness-template) |
 
