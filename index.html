@@ -104,6 +104,16 @@
     font-size:clamp(2.4rem, 7vw, 4.6rem); line-height:1.02; letter-spacing:-.01em;
     margin-bottom:16px; opacity:0; animation:fadein .5s forwards; animation-delay:.1s;
   }
+  .hero-badge{
+    align-self:flex-start; display:inline-flex; align-items:center; gap:10px; margin-bottom:22px;
+    font-family:var(--font-mono); font-size:.78rem; color:var(--text-1); text-decoration:none;
+    padding:7px 14px 7px 8px; border:1px solid var(--accent-dim); border-radius:99px;
+    background:color-mix(in srgb, var(--accent) 7%, var(--bg-raised));
+    opacity:0; animation:fadein .5s forwards; transition:border-color .2s, color .2s;
+  }
+  @media (max-width:640px){ nav{position:relative;} .hero{padding-top:32px;} }
+  .hero-badge:hover{border-color:var(--accent); color:var(--text-0);}
+  .hero-badge .new{background:var(--accent); color:#0a0a0a; font-weight:600; padding:2px 8px; border-radius:99px; font-size:.7rem;}
   .hero .role-line{
     font-family:var(--font-mono); font-size:clamp(1rem, 2.4vw, 1.25rem); color:var(--accent);
     min-height:1.6em; opacity:0; animation:fadein .5s forwards; animation-delay:.35s;
@@ -247,6 +257,7 @@
 </nav>
 
 <section class="hero" id="hero">
+  <a class="hero-badge" href="/playbooks/"><span class="new" data-i18n="hero.badgeNew">new</span><span data-i18n="hero.badge">Free playbook: job posts that attract candidates →</span></a>
   <h1>Facu Villanueva</h1>
   <div class="role-line"><span id="typewriter"></span><span class="cursor">_</span></div>
   <p class="thesis" data-i18n="hero.thesis">My obsession is simple: help build the best teams. I direct AI systems to make that real — for how I hire, evaluate talent, and operate at scale. Not demos.</p>
@@ -442,6 +453,8 @@
       "hero.getInTouch": "Get in touch →",
       "hero.whyBtn": "Why this isn't just a job to me →",
       "hero.scroll": "scroll",
+      "hero.badgeNew": "new",
+      "hero.badge": "Free playbook: job posts that attract candidates →",
       "about.eyebrow": "[ABOUT]",
       "about.h": "I help build the best teams",
       "about.lede": "I started in Human Resources and moved deliberately toward AI engineering — not to become a developer, but because the systems I needed to build great teams didn't exist yet. So I direct AI to build them.",
@@ -539,6 +552,8 @@
       "hero.getInTouch": "Escribime →",
       "hero.whyBtn": "Por qué esto no es un laburo más para mí →",
       "hero.scroll": "scroll",
+      "hero.badgeNew": "nuevo",
+      "hero.badge": "Playbook gratis: ofertas de trabajo que atraen candidatos →",
       "about.eyebrow": "[SOBRE MÍ]",
       "about.h": "Ayudo a armar los mejores equipos",
       "about.lede": "Empecé en Recursos Humanos y me moví deliberadamente hacia la ingeniería de IA — no para volverme developer, sino porque los sistemas que necesitaba para armar grandes equipos todavía no existían. Así que dirijo IA para construirlos.",
