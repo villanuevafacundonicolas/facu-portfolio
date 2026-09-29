@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Playbooks — Facu Villanueva</title>
-<meta name="description" content="Playbook gratis: escribí ofertas de trabajo que atraen candidatos, con un prompt listo para usar. Sin registro.">
+<title>Ofertas de trabajo: cómo escribirlas y revisarlas — Facu Villanueva</title>
+<meta name="description" content="Dos herramientas gratis: una arma el prompt para que una IA redacte tu oferta de trabajo y otra revisa una oferta ya publicada. Sin registro.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -83,6 +83,21 @@ pre{white-space:pre-wrap;font:.8rem/1.6 var(--fm);color:var(--text-1);padding:16
 .opt{margin-top:40px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
 .opt p{color:var(--text-1);font-size:.88rem}
 footer{text-align:center;font-family:var(--fm);font-size:.72rem;color:var(--text-2);padding:30px 0}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:780px){.two{grid-template-columns:1fr}}
+.card h3{font-family:var(--fd);font-size:1.05rem;margin:6px 0}
+.lbl{font-family:var(--fm);font-size:.72rem;color:var(--accent);margin-bottom:8px}
+.ba .good .k{color:var(--ok)}
+.ba .bad p{text-decoration:none;color:var(--text-1)}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:780px){.two{grid-template-columns:1fr}}
+.card h3{font-family:var(--fd);font-size:1.05rem;margin:6px 0}
+.lbl{font-family:var(--fm);font-size:.72rem;color:var(--accent);margin-bottom:8px}
+.ba .good .k{color:var(--ok)}
+.ba .bad p{text-decoration:none;color:var(--text-1)}
+
 </style>
 </head>
 <body>
@@ -91,130 +106,153 @@ footer{text-align:center;font-family:var(--fm);font-size:.72rem;color:var(--text
   <a class="back" href="/">← volver al sitio</a>
 </nav>
 <main>
-
 <section>
-  <div class="eyebrow"><span class="idx">// playbooks</span> recruiting con IA · gratis, sin registro</div>
-  <h1>Tu oferta de trabajo habla de vos. Tendría que hablar del candidato.</h1>
-  <div class="role">playbook_01: ofertas que convierten<span class="cursor">_</span></div>
-  <p class="lede">Un sistema de 4 pasos y una herramienta que te arma el prompt. Lo usás acá mismo, sin dejar tu mail. Te lleva 15 minutos.</p>
-  <div class="tabs">
-    <span class="tab on">01 · ofertas</span><span class="tab soon">02 · candidatos pasivos</span><span class="tab soon">03 · screening de CVs</span><span class="tab soon">04 · entrevistas</span>
-  </div>
-  <div class="stat"><b>78%</b><p>de los profesionales abandona una postulación después de leer una oferta vaga.<small>fuente: Monster, Job Description Report 2026 · [slot para dato propio LATAM]</small></p></div>
+  <div class="eyebrow"><span class="idx">// playbook 01</span> ofertas de trabajo · gratis, sin registro</div>
+  <h1>Ofertas de trabajo: cómo escribirlas y cómo revisar las que ya tenés.</h1>
+  <p class="lede">Una oferta sirve para que se postule quien puede hacer el trabajo y no se postule quien no. Para eso conviene separar lo que la persona tiene que traer de lo que puede aprender en el puesto. Hay dos herramientas: una arma el prompt para que una IA redacte la oferta, y la otra revisa una oferta ya publicada.</p>
 </section>
 
 <section>
-  <div class="eyebrow"><span class="idx">01 /</span> el sistema</div>
-  <h2>Cuatro pasos. Nada de magia.</h2>
+  <div class="eyebrow"><span class="idx">01 /</span> la idea de fondo</div>
+  <h2>Qué conviene decidir antes de escribir.</h2>
   <div class="steps">
-    <div class="card"><div class="n">paso_1</div><h3>A quién, no qué puesto</h3><p>Dos o tres rasgos concretos del perfil: qué lo mueve, cómo trabaja, por dónde pasó.</p></div>
-    <div class="card"><div class="n">paso_2</div><h3>Abrí por el candidato</h3><p>Las dos primeras líneas dicen qué gana esa persona, no qué necesitás vos.</p></div>
-    <div class="card"><div class="n">paso_3</div><h3>Impacto, no tareas</h3><p>"Vas a armar el área" pesa más que quince bullets de responsabilidades.</p></div>
-    <div class="card"><div class="n">paso_4</div><h3>Bajale el volumen a la IA</h3><p>Afuera "oportunidad increíble" y "persona dinámica". Nadie lo cree.</p></div>
+    <div class="card"><div class="n">paso_1</div><h3>Qué es eliminatorio y qué se aprende</h3><p>Si no descartarías a alguien por no tenerlo, no es un requisito. Dejá dos o tres eliminatorios y poné el resto como algo que se aprende en el puesto.</p></div>
+    <div class="card"><div class="n">paso_2</div><h3>Qué va a hacer la persona, incluido lo difícil</h3><p>Contá el trabajo tal como es, con la parte poco atractiva. Conviene que la persona lo sepa antes de postularse.</p></div>
+    <div class="card"><div class="n">paso_3</div><h3>Cómo es el proceso de selección</h3><p>Cuántos pasos hay y en cuánto tiempo va a tener noticias. Si no lo decís, cada uno lo imagina por su cuenta.</p></div>
+    <div class="card"><div class="n">paso_4</div><h3>Qué frases sobran</h3><p>Sacá lo que podría estar en la oferta de cualquier otra empresa. Y si la IA escribe algo sobre tu cultura, verificá que sea cierto.</p></div>
   </div>
 </section>
 
 <section>
-  <div class="eyebrow"><span class="idx">02 /</span> la herramienta</div>
-  <h2>Completá. Copiá. Pegá.</h2>
+  <div class="eyebrow"><span class="idx">02 /</span> herramienta 1: escribir</div>
+  <h2>Prompt para redactar una oferta.</h2>
   <div class="tool">
-    <div class="card" id="form">
-      <label>puesto</label><input data-k="puesto" placeholder="Analista de Liquidación de Sueldos">
-      <label>empresa y rubro</label><input data-k="empresa" placeholder="Distribuidora mayorista, Salta">
-      <label>personas en el equipo</label><input data-k="equipo" placeholder="12">
-      <label>perfil ideal (2-3 rasgos)</label><textarea data-k="perfil" placeholder="Pasó por un estudio contable, le gusta ordenar procesos"></textarea>
-      <label>qué gana de verdad quien entra</label><textarea data-k="gana" placeholder="Armar el área desde cero, reporte directo a dirección"></textarea>
-      <label>tono</label><select data-k="tono"><option>cercano y honesto</option><option>directo y ambicioso</option><option>técnico pero humano</option></select>
+    <div class="card" id="f1">
+      <label>puesto</label><input data-k="puesto" placeholder="Analista de reclutamiento IT">
+      <label>empresa y rubro</label><input data-k="empresa" placeholder="Consultora de selección, Salta">
+      <label>personas en el equipo</label><input data-k="equipo" placeholder="6">
+      <label>lo eliminatorio de verdad (2 o 3 cosas)</label><textarea data-k="elim" placeholder="Cerró búsquedas técnicas de punta a punta. Puede sostener una entrevista en inglés."></textarea>
+      <label>lo que puede aprender en los primeros 6 meses</label><textarea data-k="aprende" placeholder="Nuestro ATS, cómo armamos ternas, cómo medimos cada etapa"></textarea>
+      <label>qué va a resolver en este puesto</label><textarea data-k="resuelve" placeholder="Cubrir las búsquedas IT de tres clientes, desde el sourcing hasta la firma"></textarea>
+      <label>lo difícil o poco atractivo</label><textarea data-k="dificil" placeholder="Los tiempos los marca el cliente y a veces cambian a mitad de camino"></textarea>
+      <label>cómo es el proceso (pasos y plazos)</label><textarea data-k="proceso" placeholder="Charla de 30 min, caso práctico corto, entrevista con el equipo. Respondemos en 5 días hábiles después de cada paso."></textarea>
+      <label>rango salarial (opcional)</label><input data-k="rango" placeholder="Si no lo querés publicar, dejalo vacío">
+      <label>tono</label><select data-k="tono"><option>cercano y honesto</option><option>directo y sobrio</option><option>técnico pero humano</option></select>
     </div>
     <div>
-      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;prompt.txt</div><pre id="out"></pre></div>
-      <div class="btns">
-        <button class="btn" id="copy">copiar prompt</button>
-        <button class="btn btn-ghost" disabled title="v2: API de Claude con límite de uso">generar oferta · pronto</button>
-      </div>
-      <p class="note">// funciona en ChatGPT, Claude o Gemini. Lo que escribís no sale de tu navegador.</p>
+      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;prompt_oferta.txt</div><pre id="out1"></pre></div>
+      <div class="btns"><button class="btn" id="copy1">copiar prompt</button></div>
+      <p class="note">// funciona en ChatGPT, Claude o Gemini. Lo que escribís acá no sale de tu navegador. Antes de pegarlo en una IA, sacá nombres de personas: en una oferta no hacen falta.</p>
     </div>
   </div>
-  <div class="nudge"><span>¿Tenés 5 búsquedas abiertas y no llegás ni a escribir la oferta?</span><a class="btn btn-ghost" href="#diag">eso lo charlamos →</a></div>
 </section>
 
 <section>
-  <div class="eyebrow"><span class="idx">03 /</span> antes / después</div>
-  <h2>Mismo puesto. Otra oferta.</h2>
+  <div class="eyebrow"><span class="idx">03 /</span> herramienta 2: revisar</div>
+  <h2>Prompt para revisar una oferta ya publicada.</h2>
+  <p class="lede" style="margin-top:8px">Pegás tu oferta en la IA junto con este prompt. Evalúa cuatro cosas, te muestra la frase de la oferta que respalda cada respuesta y te devuelve una versión corregida, sin inventar datos.</p>
+  <div class="tool">
+    <div class="card" id="f2">
+      <label>puesto de la oferta que vas a revisar</label><input data-k="puesto2" placeholder="Analista de reclutamiento IT">
+      <p class="note" style="margin-top:14px">// el prompt te deja un espacio para pegar la oferta completa. Si tiene datos de contacto de personas, sacalos antes.</p>
+    </div>
+    <div>
+      <div class="term"><div class="bar"><i></i><i></i><i></i>&nbsp;prompt_revision.txt</div><pre id="out2"></pre></div>
+      <div class="btns"><button class="btn" id="copy2">copiar prompt</button></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">04 /</span> ejemplo</div>
+  <h2>Una oferta antes y después de aplicar el criterio.</h2>
   <div class="ba">
-    <div class="card bad"><div class="k">// antes</div><p>"Buscamos persona dinámica y proactiva para liquidación de haberes. Experiencia excluyente de 3 años, orientación a resultados y trabajo en equipo."</p></div>
-    <div class="card good"><div class="k">// después</div><p>"Vas a armar el área de sueldos de una distribuidora que pasó de 40 a 120 personas en dos años. Hoy liquidamos con planillas; vos decidís cómo se hace de acá en adelante, con línea directa a dirección. Encajás si ya te peleaste con un convenio colectivo y te quedó el gusto por ordenar lo que otros dejaron a medias."</p></div>
+    <div class="card bad"><div class="k">// antes</div><p>"Buscamos analista de reclutamiento IT con actitud proactiva y orientación a resultados. Requisitos: 5 años de experiencia, dominio de LinkedIn Recruiter, Excel avanzado, inglés fluido y disponibilidad full time. Se valorará conocimiento de ATS y metodologías ágiles."</p></div>
+    <div class="card good"><div class="k">// después</div><p>"Vas a cubrir las búsquedas IT de tres clientes, desde el sourcing hasta que el candidato firma. Lo difícil: los tiempos los marca el cliente y a veces cambian a mitad de camino. Necesitás desde el primer día haber cerrado búsquedas técnicas de punta a punta y poder sostener una entrevista en inglés. Lo demás lo aprendés acá: nuestro ATS, cómo armamos ternas y cómo medimos cada etapa. El proceso son tres pasos (una charla, un caso práctico corto y una entrevista con el equipo) y te respondemos en 5 días hábiles después de cada uno."</p></div>
   </div>
+  <p class="note">// ejemplo ilustrativo, no es una oferta real. Fijate que la de la izquierda tiene siete requisitos y ninguno dice cuál es eliminatorio.</p>
 </section>
 
 <section>
-  <div class="eyebrow"><span class="idx">04 /</span> antes de publicar</div>
-  <h2>Checklist</h2>
+  <div class="eyebrow"><span class="idx">05 /</span> lista de control</div>
+  <h2>Qué chequear antes de publicar.</h2>
   <div class="card check" id="check" style="margin-top:22px">
-    <label><input type="checkbox"> Las dos primeras líneas hablan del candidato, no de la empresa.</label>
-    <label><input type="checkbox"> Se entiende el impacto del rol sin leer la lista de tareas.</label>
-    <label><input type="checkbox"> Saqué los superlativos vacíos de la IA.</label>
-    <label><input type="checkbox"> Dejé los 5 requisitos que importan, no 15.</label>
-    <label><input type="checkbox"> Suena a mi empresa y no a cualquiera.</label>
+    <label><input type="checkbox"> Puedo decir en una línea qué va a resolver la persona.</label>
+    <label><input type="checkbox"> Los requisitos eliminatorios son tres o menos, y si faltara uno no avanzaría a nadie.</label>
+    <label><input type="checkbox"> Todo lo demás figura como "lo que vas a aprender", no como requisito.</label>
+    <label><input type="checkbox"> Cuenta lo difícil del puesto.</label>
+    <label><input type="checkbox"> Dice cuántos pasos tiene el proceso y cuándo va a recibir respuesta.</label>
+    <label><input type="checkbox"> Ninguna frase podría estar en la oferta de otra empresa.</label>
     <div class="meter"><i id="bar"></i></div>
-    <p class="note" id="msg">0/5 · todavía no la publiques</p>
+    <p class="note" id="msg">0/6 · todavía no la publiques</p>
   </div>
-  <p class="today"><b style="color:var(--text-0)">Hacelo hoy:</b> publicá la versión nueva junto a la vieja durante una semana y contá postulantes. Un solo experimento y ya tenés dato propio.</p>
+  <p class="today"><b style="color:var(--text-0)">Hacelo hoy:</b> pasá tu última oferta por el revisor y anotá dos números: cuántos requisitos pedía y cuántos eran eliminatorios de verdad. Si están muy lejos, es un buen motivo para hablarlo con quien pidió la búsqueda.</p>
 </section>
 
 <div class="cta" id="diag">
   <div class="eyebrow"><span class="idx">// siguiente paso</span> charla sin compromiso</div>
-  <h2>La oferta es la punta. El resto del proceso también pierde gente.</h2>
-  <p>Escribime por WhatsApp y charlamos 20 minutos sobre tu proceso de selección. Te digo dónde se te caen los candidatos. Sin pitch de venta: te llevás el diagnóstico, trabajes conmigo o no.</p>
+  <h2>¿Querés que miremos cómo seleccionan hoy?</h2>
+  <p>Escribime por WhatsApp y charlamos 20 minutos sobre tu proceso. Te cuento dónde veo que se les enfrían las búsquedas, trabajemos juntos o no.</p>
   <ul>
-    <li>Dónde abandonan los candidatos (y por qué)</li>
-    <li>Qué partes se pueden automatizar con IA hoy, sin comprar nada</li>
-    <li>Un plan de 3 pasos para las próximas búsquedas</li>
+    <li>En qué etapa abandonan los candidatos</li>
+    <li>Qué parte del proceso conviene automatizar y cuál no</li>
+    <li>Qué medir primero</li>
   </ul>
   <a class="btn" href="https://wa.me/5493874498444?text=Hola%20Facu%2C%20vi%20el%20playbook%20de%20ofertas%20y%20quiero%20charlar%20sobre%20mi%20proceso%20de%20selecci%C3%B3n" target="_blank" rel="noopener">escribime por WhatsApp →</a>
 </div>
-
 <div class="opt">
-  <p>¿Te sirvió? Pasáselo a alguien que esté con búsquedas abiertas. Se usa sin registrarse.</p>
+  <p>¿Te sirvió? Pasáselo a alguien con una búsqueda abierta. Se usa sin registrarse.</p>
   <button class="btn btn-ghost" id="share">copiar link</button>
 </div>
-
 </main>
 <footer>facuvillanueva.com.ar · sin tracking · hecho por un HR que programa con IA</footer>
-
 <script>
-const out=document.getElementById('out');
 const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-function build(html){
-  const g=(k,ph)=>{const x=document.querySelector(`[data-k="${k}"]`).value.trim();if(!x)return `[${ph}]`;return html?`<span class="fill">${esc(x)}</span>`:x};
-  return `Actuá como experto en employer branding y copywriting de recruiting.
+function mount(form,out,copy,build){
+  const root=document.getElementById(form),o=document.getElementById(out),b=document.getElementById(copy);
+  const mk=html=>(k,ph)=>{const el=root.querySelector('[data-k="'+k+'"]');const x=((el&&el.value)||'').trim();if(!x)return '['+ph+']';return html?'<span class="fill">'+esc(x)+'</span>':x};
+  const render=()=>{o.innerHTML=build(mk(true))};
+  root.querySelectorAll('[data-k]').forEach(e=>{e.addEventListener('input',render);e.addEventListener('change',render)});render();
+  b.onclick=async e=>{try{await navigator.clipboard.writeText(build(mk(false)));e.target.textContent='✓ copiado'}catch(_){const r=document.createRange();r.selectNodeContents(o);const s=getSelection();s.removeAllRanges();s.addRange(r);e.target.textContent='seleccionado: Ctrl+C'}setTimeout(()=>e.target.textContent='copiar prompt',2200)};
+}
+mount('f1','out1','copy1',g=>`Actuá como un reclutador senior que escribe ofertas honestas. Necesito una oferta para el puesto de ${g('puesto','PUESTO')} en ${g('empresa','EMPRESA Y RUBRO')}, para un equipo de ${g('equipo','Nº')} personas.
 
-Puesto: ${g('puesto','PUESTO')}
-Empresa: ${g('empresa','EMPRESA Y RUBRO')}, equipo de ${g('equipo','Nº')} personas.
-Perfil ideal: ${g('perfil','2-3 rasgos concretos')}
-Lo que gana de verdad quien entra: ${g('gana','1-2 cosas reales')}
+Lo eliminatorio de verdad (si falta, no hay proceso): ${g('elim','2 O 3 COSAS')}
+Lo que la persona puede aprender en sus primeros 6 meses (no lo pidas como requisito): ${g('aprende','LO APRENDIBLE')}
+Lo que va a resolver en este puesto: ${g('resuelve','QUÉ RESUELVE')}
+Lo difícil o poco atractivo de este puesto (decilo sin maquillar): ${g('dificil','LO DIFÍCIL')}
+Cómo es el proceso: ${g('proceso','PASOS Y PLAZOS')}
+Rango salarial: ${g('rango','OPCIONAL, SI NO HAY, OMITILO')}
+Tono: ${g('tono','TONO')}. Español rioplatense. Máximo 350 palabras.
 
-Escribí una oferta de trabajo que:
-1. Abra con 2-3 líneas sobre lo que esta persona va a ganar.
-2. Describa el impacto del puesto, no una lista de tareas.
-3. Use lenguaje humano, sin 15 requisitos en bullets.
-4. Cierre con un párrafo de cultura que suene real.
+Escribila con esta estructura:
+- Titular claro (máx. 8 palabras)
+- Qué vas a resolver
+- Lo difícil de este puesto
+- Lo que necesitás desde el primer día (solo lo eliminatorio)
+- Lo que vas a aprender acá
+- Cómo es el proceso (pasos y plazos)
+- Una línea para postularse
 
-Tono: ${g('tono','tono')}. Español rioplatense. Máximo 400 palabras.
-Sin superlativos vacíos ("increíble", "única", "dinámico").
+Reglas:
+- No uses "dinámico", "proactivo" ni "oportunidad única".
+- No agregues requisitos que yo no te di.
+- Si falta un dato, escribí [DATO A COMPLETAR] en vez de inventarlo.
+- No afirmes nada sobre la cultura de la empresa que yo no haya escrito.`);
+mount('f2','out2','copy2',g=>`Actuá como auditor de ofertas de trabajo. Te paso una oferta ya publicada para el puesto de ${g('puesto2','PUESTO')}.
 
-Formato:
-- Titular (máx. 8 palabras)
-- Gancho (2-3 líneas)
-- Lo que vas a hacer (3-4 frases)
-- Con quién y cómo trabajamos (3-4 frases)
-- Encajás si... (4-5 puntos)
-- Cómo postularte (1 línea)`}
-const render=()=>out.innerHTML=build(true);
-document.querySelectorAll('[data-k]').forEach(el=>el.addEventListener('input',render));render();
-document.getElementById('copy').onclick=async e=>{try{await navigator.clipboard.writeText(build(false));e.target.textContent='✓ copiado'}catch{const r=document.createRange();r.selectNodeContents(out);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);e.target.textContent='seleccionado: copialo'}setTimeout(()=>e.target.textContent='copiar prompt',1800)};
-document.getElementById('share').onclick=async e=>{try{await navigator.clipboard.writeText(location.origin+'/playbooks/');e.target.textContent='✓ link copiado'}catch{e.target.textContent=location.origin+'/playbooks/'}};
+Evaluala con estos cuatro controles y respondé en una tabla con estas columnas: control | cumple (sí, no o parcial) | frase textual de la oferta que lo respalda | cambio concreto sugerido.
+1. Eliminatorios: ¿distingue lo imprescindible de lo que se puede aprender? Contá cuántos requisitos hay y cuántos parecen realmente eliminatorios.
+2. Trabajo real: ¿cuenta qué se va a resolver y también lo difícil, o solo lo atractivo?
+3. Proceso: ¿dice cuántos pasos hay y en cuánto tiempo va a recibir respuesta la persona?
+4. Relleno: listá las frases genéricas, las que cualquier otra empresa podría haber escrito.
+
+Al final, dame una versión corregida de la oferta. No agregues información que no esté en la original: si falta un dato, marcalo como [DATO A COMPLETAR].
+
+Oferta: [PEGÁ LA OFERTA COMPLETA]`);
 const cb=[...document.querySelectorAll('#check input')],bar=document.getElementById('bar'),msg=document.getElementById('msg');
-cb.forEach(c=>c.onchange=()=>{const n=cb.filter(x=>x.checked).length;bar.style.width=n*20+'%';msg.textContent=n===5?'5/5 · publicala':`${n}/5 · todavía no la publiques`});
+cb.forEach(c=>c.onchange=()=>{const n=cb.filter(x=>x.checked).length;bar.style.width=(n*100/cb.length)+'%';msg.textContent=n===cb.length?n+'/'+cb.length+' · lista para publicar':n+'/'+cb.length+' · todavía no la publiques'});
+document.getElementById('share').onclick=async e=>{try{await navigator.clipboard.writeText(location.origin+'/playbooks/');e.target.textContent='✓ link copiado'}catch(_){e.target.textContent=location.origin+'/playbooks/'}};
 </script>
-</body></html>
+</body>
+</html>
