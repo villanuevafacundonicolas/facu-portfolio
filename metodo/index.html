@@ -62,14 +62,23 @@ pre{white-space:pre-wrap;font:.8rem/1.6 var(--fm);color:var(--text-1);padding:16
 .opt{margin-top:40px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
 .opt p{color:var(--text-1);font-size:.88rem}
 footer{text-align:center;font-family:var(--fm);font-size:.72rem;color:var(--text-2);padding:30px 0}
+.navr{display:flex;align-items:center;gap:14px}
+.lang-toggle{font-family:var(--fm);font-size:.75rem;font-weight:600;background:none;border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text-1);cursor:pointer;display:flex;gap:5px;transition:border-color .2s,color .2s}
+.lang-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.lang-toggle .sep{color:var(--text-2)}
+.lang-toggle .on{color:var(--accent)}
+html[lang=es] [data-l=en],html[lang=en] [data-l=es]{display:none}
 </style>
 </head>
 <body>
 <nav>
   <a class="brand" href="/"><span class="dot"></span>Facu Villanueva</a>
-  <a class="back" href="/">← volver al sitio</a>
+  <div class="navr">
+    <a class="back" href="/"><span data-l="es">← volver al sitio</span><span data-l="en">← back to site</span></a>
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="Toggle language / Cambiar idioma"><span data-lang-label="en">EN</span><span class="sep">/</span><span data-lang-label="es">ES</span></button>
+  </div>
 </nav>
-<main>
+<main data-l="es">
 <section>
   <div class="eyebrow"><span class="idx">// método 01</span> IA en selección · gratis, sin registro</div>
   <h1>Cómo probar una IA en tu proceso de selección antes de confiarle candidatos.</h1>
@@ -118,7 +127,7 @@ footer{text-align:center;font-family:var(--fm);font-size:.72rem;color:var(--text
   </div>
   <div class="term">
     <div class="bar"><i></i><i></i><i></i>plantilla de un caso</div>
-<pre id="tpl">CASO
+<pre class="tpl">CASO
 Tarea que se evalúa:   puntuar una respuesta según la grilla
 Consigna para la IA:   (el texto exacto que le vas a dar)
 Entrada:               (la respuesta del candidato, inventada o anonimizada)
@@ -129,7 +138,7 @@ Cómo se corrige:       (regla automática, persona u otro modelo con la grilla)
 Corridas:              3 a 5 por modelo
 Resultado:             (aciertos sobre corridas y qué escribió cuando falló)</pre>
   </div>
-  <div class="btns"><button class="btn btn-ghost" id="copy">copiar plantilla</button></div>
+  <div class="btns"><button class="btn btn-ghost js-copy">copiar plantilla</button></div>
   <p class="today"><b style="color:var(--text-0)">Hacelo hoy:</b> elegí la tarea que más le delegás a la IA y escribí tres casos con esta plantilla, uno de ellos con trampa. Probalos tres veces cada uno. Con eso ya sabés más que la mayoría de los que la usan.</p>
 </section>
 
@@ -153,13 +162,112 @@ Resultado:             (aciertos sobre corridas y qué escribió cuando falló)<
 </div>
 <div class="opt">
   <p>¿Te sirvió? Pasáselo a alguien que use IA en sus búsquedas.</p>
-  <button class="btn btn-ghost" id="share">copiar link</button>
+  <button class="btn btn-ghost js-share">copiar link</button>
 </div>
 </main>
-<footer>facuvillanueva.com.ar · sin tracking · hecho por un HR que programa con IA</footer>
+
+<main data-l="en">
+<section>
+  <div class="eyebrow"><span class="idx">// method 01</span> AI in hiring · free, no sign-up</div>
+  <h1>How to test an AI in your hiring process before you trust it with candidates.</h1>
+  <p class="lede">If you use AI to summarize interviews, score answers or screen CVs, you want to know where it gets things wrong before the mistake reaches a client or costs a candidate an opportunity. This is the method I use to measure it. In the AI industry it's called an "eval", and it works like an assessment center where the one being assessed is the model.</p>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">01 /</span> what an eval is</div>
+  <h2>The same parts as a hiring process.</h2>
+  <p class="sub">An eval has four parts. If you've ever built a structured interview, you already know them.</p>
+  <div class="four">
+    <div class="card"><div class="k">the cases</div><p>The tasks you give the model, like the questions in an interview. Start with 5 to 10 well-chosen ones.</p></div>
+    <div class="card"><div class="k">the right answer</div><p>What you expect for each case, written before you test. It can be a score, or a list of things that must appear and things that must not.</p></div>
+    <div class="card"><div class="k">the grader</div><p>Whoever decides whether the answer passes: a person, an automatic rule, or another model holding your rubric.</p></div>
+    <div class="card"><div class="k">the score</div><p>The share of cases it got right and, more importantly, which ones it failed and why.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">02 /</span> the method</div>
+  <h2>Six steps, in this order.</h2>
+  <div class="steps">
+    <div class="card"><div class="n">step_1</div><h3>Pick a real, narrow task</h3><p>"Summarize interviews" is too broad to measure. "Score an answer against a competency rubric" can be measured. Start with the task you already hand to the AI.</p></div>
+    <div class="card"><div class="n">step_2</div><h3>Write the right answer before you test</h3><p>If you decide it after reading what the AI said, you'll end up agreeing with it. Lean on your rubric, for example a BARS scale (one that describes with behaviors what each score is worth), so the right answer isn't up for debate.</p></div>
+    <div class="card"><div class="n">step_3</div><h3>Build cases with a trap</h3><p>Any model passes the easy cases. Look for the ones that would make a junior interviewer hesitate: the candidate who speaks very well and tells you nothing they actually did, or the one who sounds modest and brings concrete results.</p></div>
+    <div class="card"><div class="n">step_4</div><h3>Grade both ways</h3><p>Fail the AI when it gets it wrong and also when it refuses to do the task. If you only penalize mistakes, a model that answers "I can't help with that" gets a perfect score.</p></div>
+    <div class="card"><div class="n">step_5</div><h3>Run each case several times</h3><p>The same model, with the same question, can answer differently each time. With three to five runs per case you can tell whether it always fails or only sometimes, which is not the same thing.</p></div>
+    <div class="card"><div class="n">step_6</div><h3>Test the grader before you trust it</h3><p>A rule that looks for words can fail an innocent sentence that happens to contain the word. Give it answers you know are right and others you know are wrong, and check that it sorts them the way you would.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">03 /</span> an example case</div>
+  <h2>What a case with a trap looks like.</h2>
+  <p class="sub">Competency: solving problems without clear information. The scale says an answer that describes what the team did, with no actions of their own, is worth 2. One with a situation, their own actions, reasoning and an outcome is worth 4.</p>
+  <div class="case">
+    <div class="card">
+      <div class="lbl">what the candidate said</div>
+      <p class="quote">"Our time-to-fill was at 61 days. A review of the last 40 searches was done, the managers' feedback deadline was cut to 48 hours and the scorecards were simplified. The next quarter we were at 39 days."</p>
+    </div>
+    <div class="card">
+      <div class="lbl">right answer, written before testing</div>
+      <div class="score">2</div>
+      <p style="color:var(--text-1)">There's a concrete situation and there are numbers, but no action has an owner: "was done", "was cut", "were simplified". The trap is the numbers, which make it sound like a 4. A model that gets carried away by them overrates this candidate.</p>
+    </div>
+  </div>
+  <div class="term">
+    <div class="bar"><i></i><i></i><i></i>case template</div>
+<pre class="tpl">CASE
+Task being evaluated:  score an answer against the rubric
+Prompt for the AI:     (the exact text you will give it)
+Input:                 (the candidate's answer, made up or anonymized)
+Right answer:          (the score, or what must and must not appear)
+Why it's right:        (which part of the rubric defines it)
+The trap:              (what could confuse the AI)
+How it's graded:       (automatic rule, a person, or another model with the rubric)
+Runs:                  3 to 5 per model
+Result:                (passes out of runs, and what it wrote when it failed)</pre>
+  </div>
+  <div class="btns"><button class="btn btn-ghost js-copy">copy template</button></div>
+  <p class="today"><b style="color:var(--text-0)">Do it today:</b> pick the task you hand to AI the most and write three cases with this template, one of them with a trap. Run each one three times. That alone tells you more than most people who use it know.</p>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">04 /</span> what you get</div>
+  <h2>What having this is good for.</h2>
+  <ul class="list">
+    <li>Knowing which tasks you can hand to AI and which ones not yet.</li>
+    <li>A record to show your client how you control quality when you use AI.</li>
+    <li>A criterion to compare tools or models before paying for one.</li>
+    <li>Spotting when a model update broke something that used to work: you rerun the same cases and compare.</li>
+  </ul>
+  <p class="today">One warning: never use real candidates' CVs or interviews to test. Make the cases up or anonymize them, and check what the AI service you use does with your data.</p>
+</section>
+
+<div class="cta">
+  <div class="eyebrow"><span class="idx">// next step</span> no-strings chat</div>
+  <h2>Want to test the AI you already use in your process?</h2>
+  <p>Message me on WhatsApp and we'll put together the first cases for the task that worries you most, whether we work together afterwards or not.</p>
+  <a class="btn" href="https://wa.me/5493874498444?text=Hi%20Facu%2C%20I%20saw%20your%20method%20for%20testing%20AI%20in%20hiring%20and%20I%27d%20like%20to%20chat" target="_blank" rel="noopener">message me on WhatsApp →</a>
+</div>
+<div class="opt">
+  <p>Was it useful? Pass it on to someone who uses AI in their hiring.</p>
+  <button class="btn btn-ghost js-share">copy link</button>
+</div>
+</main>
+<footer><span data-l="es">facuvillanueva.com.ar · sin tracking · hecho por un HR que programa con IA</span><span data-l="en">facuvillanueva.com.ar · no tracking · made by an HR person who codes with AI</span></footer>
 <script>
-document.getElementById('copy').onclick=async e=>{try{await navigator.clipboard.writeText(document.getElementById('tpl').textContent);e.target.textContent='✓ plantilla copiada'}catch(_){e.target.textContent='seleccioná y copiá a mano'}};
-document.getElementById('share').onclick=async e=>{try{await navigator.clipboard.writeText(location.origin+'/metodo/');e.target.textContent='✓ link copiado'}catch(_){e.target.textContent=location.origin+'/metodo/'}};
+const META={
+  es:{title:'Cómo probar una IA en tu proceso de selección — Facu Villanueva',desc:'El método que uso para medir dónde se equivoca una IA en tareas de selección antes de confiarle candidatos: casos con trampa, respuesta correcta escrita antes, corrección para los dos lados y repeticiones.',copied:'✓ plantilla copiada',linked:'✓ link copiado',manual:'seleccioná y copiá a mano'},
+  en:{title:'How to test an AI in your hiring process — Facu Villanueva',desc:'The method I use to measure where an AI gets hiring tasks wrong before trusting it with candidates: cases with a trap, the right answer written first, grading both ways and repeated runs.',copied:'✓ template copied',linked:'✓ link copied',manual:'select and copy it by hand'}
+};
+function detectLang(){try{const s=localStorage.getItem('lang');if(s==='en'||s==='es')return s}catch(e){}return navigator.language&&navigator.language.toLowerCase().startsWith('es')?'es':'en'}
+let lang=detectLang();
+function apply(l){lang=l;document.documentElement.lang=l;document.title=META[l].title;document.querySelector('meta[name=description]').setAttribute('content',META[l].desc);
+  document.querySelectorAll('[data-lang-label]').forEach(el=>el.classList.toggle('on',el.getAttribute('data-lang-label')===l));
+  try{localStorage.setItem('lang',l)}catch(e){}}
+apply(lang);
+document.getElementById('langToggle').onclick=()=>apply(lang==='es'?'en':'es');
+document.querySelectorAll('.js-copy').forEach(b=>b.onclick=async e=>{const t=e.target.closest('section').querySelector('.tpl').textContent;try{await navigator.clipboard.writeText(t);e.target.textContent=META[lang].copied}catch(_){e.target.textContent=META[lang].manual}});
+document.querySelectorAll('.js-share').forEach(b=>b.onclick=async e=>{try{await navigator.clipboard.writeText(location.origin+'/metodo/');e.target.textContent=META[lang].linked}catch(_){e.target.textContent=location.origin+'/metodo/'}});
 </script>
 </body>
 </html>
