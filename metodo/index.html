@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cómo probar una IA en tu proceso de selección — Facu Villanueva</title>
+<meta name="description" content="El método que uso para medir dónde se equivoca una IA en tareas de selección antes de confiarle candidatos: casos con trampa, respuesta correcta escrita antes, corrección para los dos lados y repeticiones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--bg-raised:#111214;--border:#262626;--border-soft:#1a1b1e;--text-0:#fafafa;--text-1:#8a8a8a;--text-2:#5a5c60;--accent:#f5a623;--accent-dim:#8a6423;--ok:#3ecf8e;
+--fd:'Space Grotesk',system-ui,sans-serif;--fb:'Inter',system-ui,sans-serif;--fm:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);color:var(--text-0);min-height:100vh;
+background:linear-gradient(var(--border-soft) 1px,transparent 1px) 0 0/100% 44px,linear-gradient(90deg,var(--border-soft) 1px,transparent 1px) 0 0/44px 100%,var(--bg);background-attachment:fixed}
+::selection{background:var(--accent);color:#0a0a0a}
+a{color:inherit}
+nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 24px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.brand{font-family:var(--fd);font-weight:600;font-size:.95rem;text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+nav .back{font-family:var(--fm);font-size:.8rem;color:var(--text-1);text-decoration:none}
+nav .back:hover{color:var(--accent)}
+main{max-width:1100px;margin:0 auto;padding:0 20px 80px}
+section{padding:64px 0 8px}
+.eyebrow{font-family:var(--fm);font-size:.78rem;letter-spacing:.06em;color:var(--accent);margin-bottom:14px}
+.eyebrow .idx{color:var(--text-2)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.1rem,6vw,3.6rem);line-height:1.04;letter-spacing:-.01em;max-width:900px}
+.lede{color:var(--text-1);max-width:680px;line-height:1.65;margin-top:18px}
+h2{font-family:var(--fd);font-weight:600;font-size:clamp(1.4rem,3.4vw,1.9rem);margin-bottom:8px}
+.sub{color:var(--text-1);max-width:680px;line-height:1.6}
+.card{background:var(--bg-raised);border:1px solid var(--border);border-radius:8px;padding:22px 24px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:22px}
+.steps .card{transition:border-color .2s,transform .2s}.steps .card:hover{border-color:var(--accent-dim);transform:translateY(-2px)}
+.steps .n{font-family:var(--fm);font-size:.75rem;color:var(--accent)}
+.steps h3{font-family:var(--fd);font-size:1.05rem;margin:6px 0}
+.steps p{color:var(--text-1);font-size:.9rem;line-height:1.55}
+.four{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:22px}
+.four .k{font-family:var(--fm);font-size:.72rem;color:var(--accent);margin-bottom:8px}
+.four p{color:var(--text-1);font-size:.9rem;line-height:1.55}
+.case{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+@media(max-width:780px){.case{grid-template-columns:1fr}}
+.lbl{font-family:var(--fm);font-size:.72rem;color:var(--accent);margin-bottom:8px}
+.case p{line-height:1.6;font-size:.94rem}
+.case .quote{color:var(--text-1);border-left:3px solid var(--border);padding-left:14px;margin-top:10px;font-size:.9rem}
+.score{font-family:var(--fd);font-size:2.6rem;color:var(--accent);line-height:1;margin:6px 0 10px}
+.term{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:22px}
+.term .bar{display:flex;gap:6px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--border);font-family:var(--fm);font-size:.7rem;color:var(--text-2)}
+.term .bar i{width:9px;height:9px;border-radius:50%;background:var(--border)}
+pre{white-space:pre-wrap;font:.8rem/1.6 var(--fm);color:var(--text-1);padding:16px;max-height:440px;overflow:auto}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-weight:600;font-size:.85rem;background:var(--accent);color:#0a0a0a;text-decoration:none;padding:11px 18px;border-radius:7px;border:1px solid var(--accent);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 35%,transparent)}
+.btn-ghost{background:none;color:var(--text-0);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--accent);box-shadow:none}
+.today{margin-top:22px;border-left:3px solid var(--accent);padding:6px 0 6px 18px;color:var(--text-1);line-height:1.6;max-width:720px}
+.list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:18px;max-width:720px}
+.list li{color:var(--text-1);line-height:1.55}.list li::before{content:'→ ';font-family:var(--fm);color:var(--accent)}
+.cta{margin-top:64px;padding:34px;border:1px solid var(--accent-dim);border-radius:10px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,var(--bg-raised)),var(--bg-raised))}
+.cta h2{max-width:640px}
+.cta p{color:var(--text-1);max-width:620px;line-height:1.6;margin:10px 0 22px}
+.opt{margin-top:40px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.opt p{color:var(--text-1);font-size:.88rem}
+footer{text-align:center;font-family:var(--fm);font-size:.72rem;color:var(--text-2);padding:30px 0}
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="/"><span class="dot"></span>Facu Villanueva</a>
+  <a class="back" href="/">← volver al sitio</a>
+</nav>
+<main>
+<section>
+  <div class="eyebrow"><span class="idx">// método 01</span> IA en selección · gratis, sin registro</div>
+  <h1>Cómo probar una IA en tu proceso de selección antes de confiarle candidatos.</h1>
+  <p class="lede">Si usás IA para resumir entrevistas, puntuar respuestas o filtrar CVs, conviene saber dónde se equivoca antes de que el error le llegue a un cliente o le cueste una oportunidad a un candidato. Este es el método que uso para medirlo. En la industria de la IA se le dice "eval", y funciona como un assessment center, solo que el evaluado es el modelo.</p>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">01 /</span> qué es una eval</div>
+  <h2>Las mismas piezas que un proceso de selección.</h2>
+  <p class="sub">Una eval tiene cuatro partes. Si alguna vez armaste una entrevista estructurada, ya las conocés.</p>
+  <div class="four">
+    <div class="card"><div class="k">los casos</div><p>Las tareas que le das al modelo, como las preguntas de una entrevista. Conviene empezar con 5 a 10 bien pensadas.</p></div>
+    <div class="card"><div class="k">la respuesta correcta</div><p>Lo que esperás para cada caso, escrito antes de probar. Puede ser un puntaje o una lista de cosas que tienen que aparecer y otras que no.</p></div>
+    <div class="card"><div class="k">el corrector</div><p>Quién decide si la respuesta cumple: una persona, una regla automática u otro modelo con tu grilla en la mano.</p></div>
+    <div class="card"><div class="k">la nota</div><p>Qué porcentaje de casos resolvió bien y, más importante, en cuáles falló y por qué.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">02 /</span> el método</div>
+  <h2>Seis pasos, en este orden.</h2>
+  <div class="steps">
+    <div class="card"><div class="n">paso_1</div><h3>Elegí una tarea real y angosta</h3><p>"Resumir entrevistas" es demasiado amplio para medirlo. "Puntuar una respuesta según la grilla de una competencia" se puede medir. Empezá por la tarea que ya le estás delegando a la IA.</p></div>
+    <div class="card"><div class="n">paso_2</div><h3>Escribí la respuesta correcta antes de probar</h3><p>Si la decidís después de leer lo que contestó la IA, vas a terminar dándole la razón. Apoyate en tu grilla, por ejemplo una escala BARS (una escala que describe con conductas qué vale cada puntaje), para que la respuesta correcta no se discuta.</p></div>
+    <div class="card"><div class="n">paso_3</div><h3>Armá casos con trampa</h3><p>Los casos fáciles los acierta cualquier modelo. Buscá los que harían dudar a un entrevistador junior: el candidato que habla muy bien y no cuenta nada que haya hecho, o el que se describe con humildad y trae resultados concretos.</p></div>
+    <div class="card"><div class="n">paso_4</div><h3>Corregí para los dos lados</h3><p>Reprobá cuando la IA se equivoca y también cuando se niega a hacer la tarea. Si solo castigás el error, un modelo que contesta "no puedo ayudarte" saca la nota máxima.</p></div>
+    <div class="card"><div class="n">paso_5</div><h3>Repetí cada caso varias veces</h3><p>El mismo modelo, con la misma pregunta, puede contestar distinto cada vez. Con tres a cinco corridas por caso ves si falla siempre o de vez en cuando, que no es lo mismo.</p></div>
+    <div class="card"><div class="n">paso_6</div><h3>Probá al corrector antes de confiar en él</h3><p>Una regla que busca palabras puede reprobar una frase inocente que contiene la palabra. Pasale respuestas que sabés que están bien y otras que sabés que están mal, y fijate que las separe como lo harías vos.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">03 /</span> un caso de ejemplo</div>
+  <h2>Cómo se ve un caso con trampa.</h2>
+  <p class="sub">Competencia: resolver problemas sin información clara. La escala dice que vale 2 la respuesta que cuenta lo que hizo el equipo sin acciones propias, y 4 la que tiene situación, acciones propias, razonamiento y resultado.</p>
+  <div class="case">
+    <div class="card">
+      <div class="lbl">lo que dijo el candidato</div>
+      <p class="quote">"El área venía con los tiempos de cobertura en 61 días. Se hizo un diagnóstico de las últimas 40 búsquedas, se acortó el plazo de feedback de los managers a 48 horas y se simplificaron las grillas. Al trimestre siguiente estábamos en 39 días."</p>
+    </div>
+    <div class="card">
+      <div class="lbl">respuesta correcta, escrita antes de probar</div>
+      <div class="score">2</div>
+      <p style="color:var(--text-1)">Hay situación concreta y números, pero ninguna acción tiene dueño: "se hizo", "se acortó", "se simplificaron". La trampa son los números, que hacen que suene a un 4. Un modelo que se deja llevar por ellos sobrevalúa a este candidato.</p>
+    </div>
+  </div>
+  <div class="term">
+    <div class="bar"><i></i><i></i><i></i>plantilla de un caso</div>
+<pre id="tpl">CASO
+Tarea que se evalúa:   puntuar una respuesta según la grilla
+Consigna para la IA:   (el texto exacto que le vas a dar)
+Entrada:               (la respuesta del candidato, inventada o anonimizada)
+Respuesta correcta:    (el puntaje o lo que tiene que aparecer y lo que no)
+Por qué es la correcta:(qué parte de la grilla lo define)
+La trampa:             (qué podría confundir a la IA)
+Cómo se corrige:       (regla automática, persona u otro modelo con la grilla)
+Corridas:              3 a 5 por modelo
+Resultado:             (aciertos sobre corridas y qué escribió cuando falló)</pre>
+  </div>
+  <div class="btns"><button class="btn btn-ghost" id="copy">copiar plantilla</button></div>
+  <p class="today"><b style="color:var(--text-0)">Hacelo hoy:</b> elegí la tarea que más le delegás a la IA y escribí tres casos con esta plantilla, uno de ellos con trampa. Probalos tres veces cada uno. Con eso ya sabés más que la mayoría de los que la usan.</p>
+</section>
+
+<section>
+  <div class="eyebrow"><span class="idx">04 /</span> qué te llevás</div>
+  <h2>Para qué te sirve tener esto.</h2>
+  <ul class="list">
+    <li>Saber qué tareas le podés delegar a la IA y cuáles todavía no.</li>
+    <li>Un registro para mostrarle a tu cliente cómo controlás la calidad cuando usás IA.</li>
+    <li>Un criterio para comparar herramientas o modelos antes de pagar por uno.</li>
+    <li>Detectar cuándo una actualización del modelo empeoró algo que antes funcionaba: volvés a correr los mismos casos y comparás.</li>
+  </ul>
+  <p class="today">Una advertencia: nunca uses CVs ni entrevistas reales de candidatos para probar. Inventá los casos o anonimizalos, y revisá qué hace con tus datos el servicio de IA que usás.</p>
+</section>
+
+<div class="cta">
+  <div class="eyebrow"><span class="idx">// siguiente paso</span> charla sin compromiso</div>
+  <h2>¿Querés probar la IA que ya usás en tu proceso?</h2>
+  <p>Escribime por WhatsApp y armamos juntos los primeros casos para la tarea que más te preocupa, trabajemos juntos después o no.</p>
+  <a class="btn" href="https://wa.me/5493874498444?text=Hola%20Facu%2C%20vi%20el%20m%C3%A9todo%20para%20probar%20IA%20en%20selecci%C3%B3n%20y%20quiero%20charlar" target="_blank" rel="noopener">escribime por WhatsApp →</a>
+</div>
+<div class="opt">
+  <p>¿Te sirvió? Pasáselo a alguien que use IA en sus búsquedas.</p>
+  <button class="btn btn-ghost" id="share">copiar link</button>
+</div>
+</main>
+<footer>facuvillanueva.com.ar · sin tracking · hecho por un HR que programa con IA</footer>
+<script>
+document.getElementById('copy').onclick=async e=>{try{await navigator.clipboard.writeText(document.getElementById('tpl').textContent);e.target.textContent='✓ plantilla copiada'}catch(_){e.target.textContent='seleccioná y copiá a mano'}};
+document.getElementById('share').onclick=async e=>{try{await navigator.clipboard.writeText(location.origin+'/metodo/');e.target.textContent='✓ link copiado'}catch(_){e.target.textContent=location.origin+'/metodo/'}};
+</script>
+</body>
+</html>
