@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Por qué una regla automática de RRHH tiene que mirar la historia completa de cada persona — Bitácora — Facu Villanueva</title>
+<meta name="description" content="Un criterio para automatizaciones de RRHH: cuanto menos se pueda deshacer una decisión, más historia de la persona tiene que mirar la regla antes de actuar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--bg-raised:#111214;--border:#262626;--border-soft:#1a1b1e;--text-0:#fafafa;--text-1:#8a8a8a;--text-2:#5a5c60;--accent:#f5a623;--accent-dim:#8a6423;--ok:#3ecf8e;
+--fd:'Space Grotesk',system-ui,sans-serif;--fb:'Inter',system-ui,sans-serif;--fm:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);color:var(--text-0);min-height:100vh;
+background:linear-gradient(var(--border-soft) 1px,transparent 1px) 0 0/100% 44px,linear-gradient(90deg,var(--border-soft) 1px,transparent 1px) 0 0/44px 100%,var(--bg);background-attachment:fixed}
+::selection{background:var(--accent);color:#0a0a0a}
+a{color:inherit}
+nav{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 24px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.brand{font-family:var(--fd);font-weight:600;font-size:.95rem;text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+nav .back{font-family:var(--fm);font-size:.8rem;color:var(--text-1);text-decoration:none}
+nav .back:hover{color:var(--accent)}
+main{max-width:760px;margin:0 auto;padding:0 20px 80px}
+section{padding:56px 0 8px}
+.eyebrow{font-family:var(--fm);font-size:.78rem;letter-spacing:.06em;color:var(--accent);margin-bottom:14px}
+.eyebrow .idx{color:var(--text-2)}
+h1{font-family:var(--fd);font-weight:700;font-size:clamp(1.9rem,5.5vw,3rem);line-height:1.08;letter-spacing:-.01em}
+.lede{color:var(--text-1);line-height:1.65;margin-top:18px}
+h2{font-family:var(--fd);font-weight:600;font-size:clamp(1.25rem,3vw,1.6rem);margin:36px 0 10px}
+p{line-height:1.7;margin-top:12px}
+.muted{color:var(--text-1)}
+.card{background:var(--bg-raised);border:1px solid var(--border);border-radius:8px;padding:20px 22px;margin-top:18px}
+.lbl{font-family:var(--fm);font-size:.72rem;color:var(--accent);margin-bottom:8px}
+.list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.list li{color:var(--text-1);line-height:1.6}.list li::before{content:'→ ';font-family:var(--fm);color:var(--accent)}
+pre{white-space:pre-wrap;font:.8rem/1.6 var(--fm);color:var(--text-1);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:16px;overflow:auto}
+code{font-family:var(--fm);font-size:.88em;color:var(--accent)}
+footer{text-align:center;font-family:var(--fm);font-size:.72rem;color:var(--text-2);padding:30px 0}
+</style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="/"><span class="dot"></span>Facu Villanueva</a>
+  <a class="back" href="/bitacora/">← bitácora</a>
+</nav>
+<main>
+<section>
+  <div class="eyebrow"><span class="idx">Bitácora 01 ·</span> 19 de octubre de 2026 · criterio</div>
+  <h1>Por qué una regla automática de RRHH tiene que mirar la historia completa de cada persona</h1>
+  <p class="lede">Revisando un sistema de RRHH encontré una regla que miraba un solo momento de la vida laboral de alguien para tomar una decisión sin vuelta atrás. De ese caso saqué un criterio que hoy aplico a cualquier automatización que toque personas.</p>
+</section>
+
+<section>
+  <h2>Un mismo legajo guarda muchos momentos</h2>
+  <p>En RRHH casi ningún dato queda quieto. La misma persona entra, cambia de puesto, se toma una licencia, se va y a veces vuelve. Los sistemas suelen guardar cada uno de esos momentos como un registro aparte, y ahí aparece el riesgo: una regla automática puede leer un registro suelto y sacar una conclusión sobre la persona entera.</p>
+  <p>El caso que me tocó fue una regla de retención de datos. Buscaba bajas viejas para anonimizar esos legajos y no miraba si la misma persona había vuelto a la empresa. Alguien con una baja de hace años y un contrato vigente hoy podía terminar en la lista para borrar.</p>
+
+  <h2>Las decisiones irreversibles necesitan más contexto</h2>
+  <p>No todas las reglas piden el mismo cuidado. Si una regla que manda un recordatorio se equivoca, el costo es un mail de más. Una que borra datos, desvincula o descarta a alguien no se puede deshacer, y antes de actuar tiene que mirar todo lo que se sabe de esa persona.</p>
+  <p>Cuando un dato no cierra, como una fecha vacía o dos estados que se contradicen, la regla tiene que abstenerse. En software a esto se le dice fallar cerrado. Traducido a RRHH: si hay duda, el sistema no decide solo y deja el caso para que lo mire una persona.</p>
+
+  <h2>El mismo patrón fuera de la retención de datos</h2>
+  <ul class="list">
+    <li>Un filtro de CVs que descarta a alguien porque no avanzó en una búsqueda anterior, sin ver que desde entonces sumó experiencia.</li>
+    <li>Un reporte de rotación que cuenta como baja definitiva a quien se fue y volvió a los pocos meses.</li>
+    <li>Una comparación automática de desempeño que pone a alguien recién vuelto de una licencia larga contra el promedio del equipo en el mismo período.</li>
+  </ul>
+
+  <h2>Cómo quedó en mi caso</h2>
+  <p>La regla ahora mira a la persona y no a un registro: alguien entra en la lista solo si todos sus vínculos con la empresa terminaron y las fechas son coherentes. Además quedaron pruebas automáticas que reproducen estos casos, así que si alguien vuelve a tocar la regla y reaparece el error, el sistema lo marca antes de que llegue a producción.</p>
+
+  <h2>Preguntas para cualquier automatización sobre personas</h2>
+  <ul class="list">
+    <li>¿Mira la historia completa de la persona o un registro suelto?</li>
+    <li>¿Qué hace cuando un dato no cierra?</li>
+    <li>Si se equivoca, ¿se puede deshacer? Si no se puede, ¿quién lo revisa antes de que se ejecute?</li>
+    <li>¿Queda registrado quién la ejecutó y cuándo?</li>
+  </ul>
+</section>
+
+
+</main>
+<footer>facuvillanueva.com.ar</footer>
+</body>
+</html>
